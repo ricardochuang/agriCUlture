@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-def helloworld(request):
+def dashboard(request):
     context          = {}
     context['hello'] = 'Hello World!'
-    return render(request, 'helloworld.html', context)
+    return render(request, 'dashboard.html', context)
