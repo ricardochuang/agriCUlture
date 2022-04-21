@@ -1,0 +1,276 @@
+body{
+    line-height: 1.15;
+    font-size: 0.5rem;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: 0 0 / cover;
+    background-color: #101129;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.viewport {
+    /* set size */
+    min-width: 1024px;
+    max-width: 1920px;
+    min-height: 780px;
+    margin: 0 auto;
+    background: url(../images/logo.png) no-repeat 0 0 / contain;
+    display: flex;
+    padding: 3.667rem 0.833rem 0;
+}
+
+.control_column{
+    flex: 1;
+    position: relative;
+}
+
+.control_column:nth-child(1){
+    flex: 1;
+    margin: 1.333rem 0.833rem 0;
+}
+
+.column{
+    flex: 3;
+    position: relative;
+}
+.column:nth-child(2){
+    flex: 4;
+    margin: 1.333rem 0.833rem 0;
+}
+
+.panel {
+    /* board */
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-image: url(../images/border.png) 51 38 21 132;
+    border-width: 2.125rem 1.583rem 0.875rem 5.5rem;
+    position: relative;
+    margin-bottom: 0.833rem;
+}
+
+.panel .inner {
+    /* input */
+    /* height: 60px; */
+    position: absolute;
+    top: -2.125rem;
+    right: -1.583rem;
+    bottom: -0.875rem;
+    left: -5.5rem;
+    padding: 1rem 1.5rem;
+}
+
+.panel h3{
+    font-size: 0.833rem;
+    color: #fff;
+}
+
+/* ----------------------animation-------------------------------------- */
+@keyframes row{
+  0%{}
+  100%{
+    transform: translateY(-50%);
+  }
+}
+/* animation init */
+.monitor .marquee {
+  /* //infinite animation*/
+  animation: row  10s linear infinite;
+}
+/*animation stop when mouse in  */
+.monitor .marquee:hover {
+  animation-play-state: paused;
+}
+
+/* first */
+.first{
+    top: -2.125rem;
+    right: -1.583rem;
+    bottom: -0.875rem;
+    left: 0.5rem;
+    padding: 1rem 1.5rem;
+}
+
+/* time_vs_price */
+.time_vs_price {
+  height: 14rem;
+}
+.time_vs_price .caption {
+  display: flex;
+  line-height: 1;
+}
+.time_vs_price h3 {
+  height: 0.75rem;
+  padding-right: 0.75rem;
+  border-right: 0.083rem solid #00f2f1;
+}
+.time_vs_price a {
+  padding: 0.167rem;
+  font-size: 0.667rem;
+  margin: -0.125rem 0 0 0.875rem;
+  border-radius: 0.125rem;
+  color: #0bace6;
+}
+.time_vs_price a.active {
+  background-color: #4c9bfd;
+  color: #fff;
+}
+.time_vs_price .inner {
+  display: flex;
+  flex-direction: column;
+
+}
+.time_vs_price .chart {
+  flex: 1;
+  padding-top: 0.8rem;
+  position: relative;
+}
+.time_vs_price .label {
+  position: absolute;
+  left: 1.75rem;
+  top: 0.75rem;
+  color: #4996f5;
+  font-size: 0.583rem;
+}
+.time_vs_price .time_vs_price_line {
+  width: 100%;
+  height: 100%;
+}
+
+/* time_vs_weather */
+.time_vs_weather {
+  height: 18rem;
+}
+.time_vs_weather .caption {
+  display: flex;
+  line-height: 1;
+}
+.time_vs_weather h3 {
+  height: 0.75rem;
+  padding-right: 0.75rem;
+  border-right: 0.083rem solid #00f2f1;
+}
+.time_vs_weather a {
+  padding: 0.167rem;
+  font-size: 0.667rem;
+  margin: -0.125rem 0 0 0.875rem;
+  border-radius: 0.125rem;
+  color: #0bace6;
+}
+.time_vs_weather a.active {
+  background-color: #4c9bfd;
+  color: #fff;
+}
+.time_vs_weather .inner {
+  display: flex;
+  flex-direction: column;
+}
+.time_vs_weather .chart {
+  flex: 1;
+  padding-top: 0.6rem;
+  position: relative;
+}
+.time_vs_weather .label {
+  position: absolute;
+  left: 1.75rem;
+  top: 0.75rem;
+  color: #4996f5;
+  font-size: 0.583rem;
+}
+.time_vs_weather .time_vs_weather_line {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* location_vs_price */
+.location_vs_price {
+  height: 14rem;
+}
+.location_vs_price .caption {
+  display: flex;
+  line-height: 1;
+}
+.location_vs_price h3 {
+  height: 0.75rem;
+  padding-right: 0.75rem;
+  border-right: 0.083rem solid #00f2f1;
+}
+.location_vs_price a {
+  padding: 0.167rem;
+  font-size: 0.667rem;
+  margin: -0.125rem 0 0 0.875rem;
+  border-radius: 0.125rem;
+  color: #0bace6;
+}
+.location_vs_price a.active {
+  background-color: #4c9bfd;
+  color: #fff;
+}
+.location_vs_price .inner {
+  display: flex;
+  flex-direction: column;
+}
+.location_vs_price .chart {
+  flex: 1;
+  padding-top: 0.6rem;
+  position: relative;
+}
+.location_vs_price .label {
+  position: absolute;
+  left: 1.75rem;
+  top: 0.75rem;
+  color: #4996f5;
+  font-size: 0.583rem;
+}
+
+
+/* location_vs_weather */
+.location_vs_weather {
+  height: 10.333rem;
+}
+.location_vs_weather .caption {
+  display: flex;
+  line-height: 1;
+}
+.location_vs_weather h3 {
+  height: 0.75rem;
+  padding-right: 0.75rem;
+  border-right: 0.083rem solid #00f2f1;
+}
+.location_vs_weather a {
+  padding: 0.167rem;
+  font-size: 0.667rem;
+  margin: -0.125rem 0 0 0.875rem;
+  border-radius: 0.125rem;
+  color: #0bace6;
+}
+.location_vs_weather a.active {
+  background-color: #4c9bfd;
+  color: #fff;
+}
+.location_vs_weather .inner {
+  display: flex;
+  flex-direction: column;
+}
+.location_vs_weather .chart {
+  flex: 1;
+  padding-top: 0.6rem;
+  position: relative;
+}
+.location_vs_weather .label {
+  position: absolute;
+  left: 1.75rem;
+  top: 0.75rem;
+  color: #4996f5;
+  font-size: 0.583rem;
+}
