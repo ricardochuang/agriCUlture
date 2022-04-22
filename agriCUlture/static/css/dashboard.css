@@ -69,6 +69,7 @@ a{
     padding: 1rem 1.5rem;
 }
 
+
 .panel h3{
     font-size: 0.833rem;
     color: #fff;
@@ -93,10 +94,23 @@ a{
 
 /* first */
 .first{
+    height:20rem;
+    width:15rem;
     top: -2.125rem;
     right: -1.583rem;
     bottom: -0.875rem;
     left: 0.5rem;
+    padding: 1rem 1.5rem;
+}
+
+.first .content{
+    /* input */
+    /* height: 60px; */
+    position: absolute;
+    top: -2.125rem;
+    right: -1.583rem;
+    bottom: -0.875rem;
+    left: -5.5rem;
     padding: 1rem 1.5rem;
 }
 
