@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 
+# this method will run when we first go to http://127.0.0.1:8000/dashboard/ website
 def dashboard(request):
-    context          = {}
-    context['hello'] = 'Hello World!'
-    return render(request, 'dashboard.html', context)
+    return render(request, 'dashboard.html')
