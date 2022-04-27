@@ -1,6 +1,8 @@
 *.pyc
-.idea/
+.idea/*
 db.sqlite3
-data/
+data/*
 .DS_Store
 *.ipynb_checkpoints
+venv/*
+
