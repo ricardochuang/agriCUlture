@@ -23,9 +23,9 @@
 
 
 // before loading
-window.onload = (function(){
+window.onload = (function () {
     //get Time
-    setInterval(function(){
+    setInterval(function () {
         var date = new Date();
         var year = date.getFullYear();
         var mon_no = date.getMonth();
@@ -49,11 +49,11 @@ window.onload = (function(){
             s = "0" + s;
         }
         var d = document.getElementById('showTime');
-        var dateShow = month[mon_no]+'/' + day + '/' + year + ' ' + date[date_no] + ' ' + h + ':' + m+':' + s;
-        d.innerHTML =  dateShow;
-        }
-    ,1000)
-//set default date value as today
+        var dateShow = month[mon_no] + '/' + day + '/' + year + ' ' + date[date_no] + ' ' + h + ':' + m + ':' + s;
+        d.innerHTML = dateShow;
+    }
+        , 1000)
+    //set default date value as today
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -122,12 +122,29 @@ window.onload = (function(){
         series: [{
             name: 'Corn',
             // data
-            data: [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+            data: [24, 40, 101, 134, 90, 230, 210, "-", "-", "-", "-", "-"],
             type: 'line',
             smooth: true,
             itemStyle: {
                 color: '#00f2f1'
             }
+        },
+        {
+            name: 'Corn_Predict',
+            // data
+            data: ["-", "-", "-", "-", "-", "-", 210, 230, 120, 230, 210, 120],
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#00f2f1',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
         },
         {
             name: 'Wheat',
@@ -147,7 +164,7 @@ window.onload = (function(){
             itemStyle: {
                 color: '##FFFAFA'
             }
-                }]
+        }]
     };
     var myechart = echarts.init($('.time_vs_price_line')[0]);
     myechart.setOption(option);
@@ -226,8 +243,8 @@ window.onload = (function(){
             smooth: true,
             itemStyle: {
                 color: '#00f2f1'
-                    }
-                },
+            }
+        },
         {
             name: 'Air Quality',
             data: [45, 84, 91, 74, 160, 250, 140, 231, 278, 322, 160, 94],
@@ -255,7 +272,7 @@ window.onload = (function(){
             itemStyle: {
                 color: '##FFFAFA'
             }
-                }]
+        }]
     };
     var myechart = echarts.init($('.time_vs_weather_line')[0]);
     myechart.setOption(option);
