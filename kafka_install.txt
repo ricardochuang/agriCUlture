@@ -1,0 +1,37 @@
+# install Kafka server
+wget https://archive.apache.org/dist/kafka/2.5.0/kafka_2.12-2.5.0.tgz
+tar -xvzf kafka_2.12-2.5.0.tgz
+
+sudo vim server.properties
+advertised.listeners=PLAINTEXT://localhost:9092
+zookeeper.connect=localhost:2181
+
+# zookeeper.properties
+
+# fire up zookeeper and kafka
+bin/zookeeper-server-start.sh config/zookeeper.properties
+JMX_PORT=8004 bin/kafka-server-start.sh config/server.properties
+
+
+# install Kafka manager
+git clone https://github.com/yahoo/CMAK
+./sbt clean dist
+cd target/universal
+unzip cmak
+cd cmak
+
+# config
+sudo vim conf/application.conf
+cmak.zkhosts="localhost:2181"
+
+# fire up
+bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080
+
+
+# start everything together
+# zookeeper
+sudo /opt/kafka_2.12-2.5.0/bin/zookeeper-server-start.sh config/zookeeper.properties
+# kafka
+sudo JMX_PORT=8004 /opt/kafka_2.12-2.5.0/bin/kafka-server-start.sh config/server.properties
+# kafka manager
+sudo /opt/CMAK/target/universal/cmak-3.0.0.6/bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080
