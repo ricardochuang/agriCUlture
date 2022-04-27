@@ -76,7 +76,8 @@ window.onload = (function () {
             // category
             type: 'category',
             // x-axis
-            data: ['0h', '2h', '4h', '6h', '8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
+//            data: ['0h', '2h', '4h', '6h', '8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
+            data: null,
             axisTick: {
                 show: false
             },
@@ -166,10 +167,22 @@ window.onload = (function () {
             }
         }]
     };
+
+    $.ajax({
+        type : 'post',
+        url : '/ajax/json/',
+        dataType : 'json',
+        async:false,
+        success : function(ret) {
+            option.xAxis.data = ret.time;
+        },
+        error : function(err) {
+        }
+    });
+
     var myechart = echarts.init($('.time_vs_price_line')[0]);
     myechart.setOption(option);
 })();
-
 
 //time_vs_weather_line
 (function () {
