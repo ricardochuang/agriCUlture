@@ -11,6 +11,5 @@ def dashboard(request):
 
 @csrf_exempt
 def ajax_json(request):
-    print("In ajax_json")
     time_dict = {'time': ['0h', '2h', '4h', '6h', '8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h']}
     return HttpResponse(json.dumps(time_dict), content_type='application/json')
