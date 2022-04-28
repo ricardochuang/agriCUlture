@@ -53,14 +53,14 @@ window.onload = (function () {
         d.innerHTML = dateShow;
     }
         , 1000)
-    //set default date value as today
-    var now = new Date();
-    var day = ("0" + now.getDate()).slice(-2);
-    var month = ("0" + (now.getMonth() + 1)).slice(-2);
-    var today = now.getFullYear() + "-" + month + "-" + day;
-    todayDoc = document.getElementById('date')
-    todayDoc.value = today;
-    todayDoc.setAttribute("max", today);
+//    //set default date value as today
+//    var now = new Date();
+//    var day = ("0" + now.getDate()).slice(-2);
+//    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+//    var today = now.getFullYear() + "-" + month + "-" + day;
+//    todayDoc = document.getElementById('date')
+//    todayDoc.value = today;
+//    todayDoc.setAttribute("max", today);
 })();
 
 

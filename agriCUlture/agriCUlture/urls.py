@@ -23,4 +23,6 @@ urlpatterns = [
     path('dashboard/', dashboardShow.dashboard),
     path('dashboard/map',map.USA),
     path('ajax/json/', dashboardShow.ajax_json),
+    path('results/',dashboardShow.show_selected),
+#     path('results/map',map.USA),
 ]
