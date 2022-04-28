@@ -246,7 +246,10 @@ a{
   color: #4996f5;
   font-size: 0.583rem;
 }
-
+.location_vs_price .location_vs_price_map {
+  width: 100%;
+  height: 100%;
+}
 
 /* location_vs_weather */
 .location_vs_weather {
@@ -287,4 +290,8 @@ a{
   top: 0.75rem;
   color: #4996f5;
   font-size: 0.583rem;
+}
+.location_vs_weather .location_vs_weather_map {
+  width: 100%;
+  height: 100%;
 }

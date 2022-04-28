@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import dashboardShow
+from . import map
 
 urlpatterns = [
 #     path('admin/', admin.site.urls),
     path('dashboard/', dashboardShow.dashboard),
+    path('dashboard/map',map.USA),
+    path('ajax/json/', dashboardShow.ajax_json),
 ]
