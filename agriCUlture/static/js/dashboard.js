@@ -244,8 +244,26 @@ window.onload = (function () {
     var option = {
         //hover to show detail
         tooltip: {
-            trigger: 'axis'
-        },
+                    trigger: 'axis',
+                    formatter: function (params) {
+                                var unit = ['°C', '°C', 'kPa', 'kPa', 'ppm', 'ppm', '%', '%', 'mm', 'mm']
+                                var res =
+                                  "<div style='margin-bottom:5px;padding:0 12px;width:100%;height:24px;line-height:24px;border-radius:3px;'><p>" +
+                                  params[0].name +
+                                  " </p></div>";
+                                for (var i = 0; i < params.length; i++) {
+                                  if (params[i].data != '-' && params[i].data != params[(i + 1) % params.length].data){
+                                     res += `<div style="color: #fff;font-size: 14px; padding:0 12px;line-height: 24px">
+                                         <span style="display:inline-block;margin-right:5px;border-radius:2px;width:10px;height:10px;background-color:${[ params[i].color,]};"></span>
+                                         ${params[i].seriesName}
+                                         ${params[i].data} ${unit[i]}
+                                       </div>`;
+                                  }
+
+                                  }
+                                return res;
+                                }
+                    },
         xAxis: {
             // category
             type: 'category',
