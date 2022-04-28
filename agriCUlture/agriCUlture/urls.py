@@ -22,7 +22,6 @@ urlpatterns = [
 #     path('admin/', admin.site.urls),
     path('dashboard/', dashboardShow.dashboard),
     path('dashboard/map',map.USA),
-    path('ajax/json/', dashboardShow.ajax_json),
+    path('ajax/json/', dashboardShow.first_onload_show),
     path('results/',dashboardShow.show_selected),
-#     path('results/map',map.USA),
 ]
