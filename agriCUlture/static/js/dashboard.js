@@ -79,23 +79,20 @@ window.onload = (function () {
                         for (var i = 0; i < params.length; i++) {
                           if (params[i].data != '-' && params[i].data != params[(i + 1) % params.length].data){
                              res += `<div style="color: #fff;font-size: 14px; padding:0 12px;line-height: 24px">
-                                 <span style="display:inline-block;margin-right:5px;border-radius:2px;width:10px;height:10px;background-color:${[
-                                   params[i].color,
-                                 ]};"></span>
+                                 <span style="display:inline-block;margin-right:5px;border-radius:2px;width:10px;height:10px;background-color:${[ params[i].color,]};"></span>
                                  ${params[i].seriesName}
-                                 ${params[i].data}
+                                 ${params[i].data} USD
                                </div>`;
                           }
 
-                        }
+                          }
                         return res;
-            }
-        },
+                        }
+            },
         xAxis: {
             // category
             type: 'category',
             // x-axis
-//            data: ['0h', '2h', '4h', '6h', '8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
             data: null,
             axisTick: {
                 show: false
@@ -141,7 +138,7 @@ window.onload = (function () {
         series: [{
             name: 'Corn',
             // data
-            data: [24, 40, 101, 134, 90, 230, 210, "-", "-", "-", "-", "-"],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
@@ -149,9 +146,9 @@ window.onload = (function () {
             }
         },
         {
-            name: 'Corn_Predict',
+            name: 'Corn Predict',
             // data
-            data: ["-", "-", "-", "-", "-", "-", 210, 230, 120, 230, 210, 120],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
@@ -167,7 +164,7 @@ window.onload = (function () {
         },
         {
             name: 'Wheat',
-            data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
@@ -175,29 +172,69 @@ window.onload = (function () {
             }
         },
         {
-            name: 'Rice',
+            name: 'Wheat Predict',
             // data
-            data: [12, 17, 34, 28, 16, 11, 6, 19, 15, 23, 19, 40],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '##FFFAFA'
+                normal: {
+                    color: '#ed3f35',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
             }
-        }]
-    };
 
+        },
+        {
+            name: 'Rice',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                color: '#FFFAFA'
+            }
+        },
+         {
+            name: 'Rice Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#FFFAFA',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+                },
+        ]
+    };
     $.ajax({
         type : 'post',
         url : '/ajax/json/',
         dataType : 'json',
         async:false,
         success : function(ret) {
+//            console.log(ret)
             option.xAxis.data = ret.time;
+            option.series[0].data = ret.corn_real;
+            option.series[1].data = ret.corn_pred;
+            option.series[2].data = ret.wheat_real;
+            option.series[3].data = ret.wheat_pred;
+            option.series[4].data = ret.rice_real;
+            option.series[5].data = ret.rice_pred;
         },
         error : function(err) {
         }
     });
-
     var myechart = echarts.init($('.time_vs_price_line')[0]);
     myechart.setOption(option);
 })();
@@ -213,7 +250,7 @@ window.onload = (function () {
             // category
             type: 'category',
             // x-axis
-            data: ['0h', '2h', '4h', '6h', '8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
+            data: null,
             axisTick: {
                 show: false
             },
@@ -259,52 +296,167 @@ window.onload = (function () {
         series: [{
             name: 'Temperature',
             // data
-            data: [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
                 color: '#00f2f1'
             }
         },
+        {
+            name: 'Temperature Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#00f2f1',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+        },
+
         {
             name: 'Atmospheric pressure',
             // data
-            data: [26, 18, 81, 74, 97, 60, 100, 201, 210, 170, 140, 160],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '#00f2f1'
+                color: '#7CFC00'
             }
         },
+
+        {
+            name: 'Atmospheric pressure Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#7CFC00',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+        },
+
         {
             name: 'Air Quality',
-            data: [45, 84, 91, 74, 160, 250, 140, 231, 278, 322, 160, 94],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
                 color: '#ed3f35'
             }
         },
+
+        {
+            name: 'Air Quality Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#ed3f35',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+        },
+
         {
             name: 'Moisture',
-            data: [10, 15, 32, 34, 38, 42, 46, 21, 14, 13, 17, 20],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '#ed3f35'
+                color: '#FFFF00'
             }
         },
+
+        {
+            name: 'Moisture Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#FFFF00',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+        },
+
         {
             name: 'Precipitation',
             // data
-            data: [12, 17, 34, 28, 16, 11, 6, 19, 15, 23, 19, 40],
+            data: null,
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '##FFFAFA'
+                color: '#FFFAFA'
             }
-        }]
+        },
+        {
+            name: 'Precipitation Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#FFFAFA',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+        },
+        ]
     };
+    $.ajax({
+            type : 'post',
+            url : '/ajax/json/',
+            dataType : 'json',
+            async:false,
+            success : function(ret) {
+//                console.log(ret)
+                option.xAxis.data = ret.time;
+                option.series[0].data = ret.temp_real;
+                option.series[1].data = ret.temp_pred;
+                option.series[2].data = ret.atmospheric_real;
+                option.series[3].data = ret.atmospheric_pred;
+                option.series[4].data = ret.airQuality_real;
+                option.series[5].data = ret.airQuality_pred;
+                option.series[6].data = ret.moisture_real;
+                option.series[7].data = ret.moisture_pred;
+                option.series[8].data = ret.precipitation_real;
+                option.series[9].data = ret.precipitation_pred;
+            },
+            error : function(err) {
+            }
+        });
     var myechart = echarts.init($('.time_vs_weather_line')[0]);
     myechart.setOption(option);
 })();
