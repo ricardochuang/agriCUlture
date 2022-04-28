@@ -1,6 +1,7 @@
 from kafka import KafkaProducer
 import time
 import json
+import csv
 from data import get_registered_user
 
 
@@ -12,14 +13,17 @@ def get_partition(key, all, available):
     return 0
 
 
-producer = KafkaProducer(bootstrap_servers='localhost:9092'
-                         , value_serializer=json_serializer)
-# ,partitioner=get_partition)
+producer = KafkaProducer(bootstrap_servers='localhost:9092',
+                         value_serializer=json_serializer)
+FILE_NAME = '../data/sum.csv'
+TOPIC_NAME = 'agri_stream'
 
 if __name__ == '__main__':
-    while True:
-        registered_user = get_registered_user()
-        print(registered_user)
-        # send(topic_name, data)
-        producer.send('registered_user', registered_user)
-        time.sleep(2)
+    with open(FILE_NAME, encoding='utf-8-sig') as fh:
+        reader = csv.reader(fh)
+        for row in reader:
+            print(row)
+            # send(topic_name, data)
+            # [date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature]
+            producer.send(TOPIC_NAME, row)
+            time.sleep(2)
