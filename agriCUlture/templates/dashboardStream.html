@@ -1,0 +1,135 @@
+<!--&lt;!&ndash;<h1>{{ hello }}</h1>&ndash;&gt;-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AgriCUture Dashboard</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+</head>
+
+<body>
+    <div class="viewport">
+
+        <div class="control_column">
+
+                <div class="first panel">
+                    <div class="content">
+                        <!--show time in the very beginning-->
+                        <h3 id="showTime">
+                            Time loading...
+                        </h3><br>
+                        <!--control box to select data-->
+                        <div class="control">
+                            <form action="/create_post/" method="POST" id="post-form">
+                                {% csrf_token %}
+                                <!--Day select begins-->
+                                <div class="daySelect">
+                                    <h3>Year Select</h3>
+                                    <br>
+<!--                                    <input type="month" id="date" name="date" class="date" value=""><br><br>-->
+                                    <select name="year" class="year" id="year" disabled="disabled">
+                                        <option value='2022'> 2022 </option>
+                                        <option value='2021'> 2021 </option>
+                                        <option value='2020'> 2020 </option>
+                                        <option value='2019'> 2019 </option>
+                                        <option value='2018'> 2018 </option>
+                                        <option value='2017'> 2017 </option>
+                                    </select><br><br>
+                                </div>
+                                <!--Day select ends-->
+
+                                <!--Agriculture select begins-->
+                                <div class="agricultureSelect">
+                                    <h3>Agriculture Select</h3>
+                                    <br>
+                                    <select name="agriculture" id="agriculture" disabled="disabled">
+                                        <option value='All'> All </option>
+                                        <option value='Corn'> Corn </option>
+                                        <option value='Wheat'> Wheat </option>
+                                        <option value='Rice'> Rice </option>
+                                    </select><br><br>
+                                </div>
+                                <!--Agriculture select ends-->
+
+
+                                <!--Weather select begins-->
+                                <div class="weatherSelect">
+                                    <h3>Weather Select</h3>
+                                    <br>
+                                    <select name="weather" id="weather" disabled="disabled">
+                                        <option value='All'> All </option>
+                                        <option value='Temperature'> Temperature </option>
+                                        <option value='Air Quality'> Air Quality </option>
+                                        <option value='Precipitation'> Precipitation </option>
+                                        <option value='Atmospheric pressure'> Atmospheric pressure </option>
+                                        <option value='Moisture'> Moisture </option>
+                                    </select><br><br>
+                                </div>
+                                <!--Weather select ends-->
+
+                                <!--Submit Change-->
+                                <br>
+<!--                                <input type="submit" value="Submit">-->
+<!--                                <button id="111">Click me</button>-->
+<!--                                <input type="button" value="click me" id="111"/>-->
+<!--                                <p id="demo">1111</p>-->
+                                <input type="submit" value="Submit" disabled="disabled">
+                            </form>
+                            <br><br>
+                            <h3>Streaming</h3><br>
+                            <form action="/dashboardStream/" method="POST" id="stream">
+                                {% csrf_token %}
+                                <input type="text" name="yearSelected" placeholder='Enter A Year'><br><br>
+                                <input type="submit" value="Start">
+                            </form>
+                            <br>
+                            <a href="/dashboard/"><input type="button" value="Stop"></a>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+
+        <div class="column">
+
+            <!-- Time vs price -->
+            <div class="time_vs_price panel">
+                <div class="inner">
+                    <div class="caption">
+                        <h3>Time vs Price</h3>
+                    </div>
+                    <div class="chart">
+<!--                        <div class="label">Unit: USD</div>-->
+                        <div class="time_vs_price_line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time vs weather -->
+            <div class="time_vs_weather panel">
+                <div class="inner">
+                    <div class="caption">
+                        <h3>Time vs Weather</h3>
+                    </div>
+                    <div class="chart">
+                        <!--                    <div class="label">Unit: USD</div>-->
+                        <div class="time_vs_weather_line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="../static/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+<script src="../static/js/dashboardStream.js"></script>
+
+</html>
