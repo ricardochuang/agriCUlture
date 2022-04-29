@@ -6,6 +6,8 @@ import json
 import random
 
 
+SELECTED_YEAR = 1990
+
 ########### this method will run when we first go to http://127.0.0.1:8000/dashboard/ website #########################
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -14,8 +16,9 @@ def dashboard(request):
 
 ############ When using streaming, go to a new website. Using kafka here ###############################################
 def dashboardStream(request):
-    year_choose =  request.POST['yearSelected']
-    print(year_choose)
+    SELECTED_YEAR =  request.POST['yearSelected']
+    print("SELECTED_YEAR new!")
+    print(SELECTED_YEAR)
     return render(request, 'dashboardStream.html')
 
 
