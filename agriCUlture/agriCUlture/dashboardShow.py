@@ -152,7 +152,7 @@ def show_selected(request):
         year = d[0].split('/')[2]
         month = d[0].split('/')[0]
         # print(f'year: {year}')
-        if request.POST['year'] == year:
+        if year == '2020':
             res_dict['time'].append(month)
             res_dict['corn_real'].append(d[1])
             res_dict['corn_pred'].append('-')
