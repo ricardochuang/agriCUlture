@@ -8,28 +8,22 @@ from pyspark.streaming.kafka import KafkaUtils
 TOPIC_NAME = 'agri_stream'
 # spark-submit --jars spark-streaming-kafka-0-8-assembly_2.11-2.3.2.jar consumer.py
 
+
+def send_to_front(msg):
+    msg = json.loads(msg.value)
+    return msg
+
+
 sc = SparkContext(appName="agri spark context")
 ssc = StreamingContext(sc, 10)
 
-message = KafkaUtils.createDirectStream(ssc, topics=['agri_stream'], kafkaParams={'metadata.broker.list':'localhost:9092'})
-print("&***********************************")
-print(message)
-print("&***********************************")
-words = message.map(lambda x: x[1]).flatMap(lambda x: x.split(","))
-wordcount = words.map(lambda x: (x, 1)).reduceByKey(lambda a, b: a + b)
+consumer = KafkaConsumer('agri_stream',
+                         bootstrap_servers='localhost:9092',
+                         auto_offset_reset='earliest',
+                         group_id='consumer-group-A')
 
-wordcount.pprint()
-ssc.start()
-ssc.awaitTermination()
-
-
-# consumer = KafkaConsumer('agri_stream',
-#                          bootstrap_servers='localhost:9092',
-#                          auto_offset_reset='earliest',
-#                          group_id='consumer-group-A')
-
-# print('starting consumer...')
-# time.sleep(3)
+print('starting consumer...')
+time.sleep(3)
 
 # for msg in consumer:
 #     record = json.loads(msg.value)
@@ -37,6 +31,26 @@ ssc.awaitTermination()
 #     lines = lines.map(lambda x: (x[0], x[1:]))
 #     print(lines.collect())
 
+
+message = KafkaUtils.createDirectStream(ssc,
+                                        topics=['agri_stream'],
+                                        kafkaParams={'metadata.broker.list': 'localhost:9092'})
+
+print("&***********************************\n")
+print(message)
+print("&***********************************\n")
+
+words = message \
+    .map(lambda x: x[1]) \
+    .flatMap(lambda x: x.split(","))
+
+wordcount = words \
+    .map(lambda x: (x, 1)) \
+    .reduceByKey(lambda a, b: a + b)
+
+wordcount.pprint()
+ssc.start()
+ssc.awaitTermination()
 
 '''
 ConsumerRecord(
