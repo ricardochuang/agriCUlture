@@ -2,7 +2,6 @@ from kafka import KafkaProducer
 import time
 import json
 import csv
-from data import get_registered_user
 
 
 def json_serializer(data):

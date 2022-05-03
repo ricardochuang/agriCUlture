@@ -30,8 +30,49 @@ bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080
 
 # start everything together
 # zookeeper
-sudo /opt/kafka_2.12-2.5.0/bin/zookeeper-server-start.sh config/zookeeper.properties
+sudo /opt/kafka_2.12-2.5.0/bin/zookeeper-server-start.sh /opt/kafka_2.12-2.5.0/config/zookeeper.properties
 # kafka
-sudo JMX_PORT=8004 /opt/kafka_2.12-2.5.0/bin/kafka-server-start.sh config/server.properties
+sudo JMX_PORT=8004 /opt/kafka_2.12-2.5.0/bin/kafka-server-start.sh /opt/kafka_2.12-2.5.0/config/server.properties
 # kafka manager
-sudo /opt/CMAK/target/universal/cmak-3.0.0.6/bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080
+sudo /opt/CMAK/target/universal/cmak-3.0.0.6/bin/cmak -Dconfig.file=/opt/CMAK/target/universal/cmak-3.0.0.6/conf/application.conf -Dhttp.port=8080
+
+
+Package                Version
+---------------------- ---------
+brotlipy               0.7.0
+certifi                2021.10.8
+cffi                   1.15.0
+charset-normalizer     2.0.4
+conda                  4.11.0
+conda-content-trust    0+unknown
+conda-package-handling 1.7.3
+cryptography           36.0.0
+idna                   3.3
+pip                    21.2.2
+pycosat                0.6.3
+pycparser              2.21
+pyOpenSSL              21.0.0
+PySocks                1.7.1
+requests               2.27.1
+ruamel-yaml-conda      0.15.100
+setuptools             58.0.4
+six                    1.16.0
+tqdm                   4.62.3
+urllib3                1.26.7
+wheel                  0.37.1
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/edz/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/edz/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/edz/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/edz/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
