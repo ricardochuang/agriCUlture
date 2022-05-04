@@ -1,5 +1,4 @@
-﻿Year,State,Average Temperature(F),Average Temperature(C),Precipitation(inch),Precipitation(mm)
-2022,Alabama,61,16.11111111,70.75,1797.05
+﻿2022,Alabama,61,16.11111111,70.75,1797.05
 2021,Alabama,60.5,15.83333333,63.99,1625.346
 2020,Alabama,62.8,17.11111111,76.02,1930.908
 2019,Alabama,61.6,16.44444444,70.34,1786.636
@@ -259,6 +258,3 @@
 2020,Puerto Rico,80,26.66666667,31.3,795.02
 2019,Puerto Rico,80,26.66666667,31.3,795.02
 2018,Puerto Rico,80,26.66666667,31.3,795.02
-,,,,,
-,,,,,
-Source,"NOAA National Centers for Environmental information, Climate at a Glance: Divisional Time Series, published April 2022, retrieved on May 3, 2022 from https://www.ncdc.noaa.gov/cag/",,,,
