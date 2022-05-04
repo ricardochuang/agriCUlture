@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,139 +19,139 @@
 
         <div class="control_column">
 
-                <div class="first panel">
-                    <div class="content">
-                        <!--show time in the very beginning-->
-                        <h3 id="showTime">
-                            Time loading...
-                        </h3><br>
-                        <!--control box to select data-->
-                        <div class="control">
-                            <form action="/create_post/" method="POST" id="post-form">
-                                {% csrf_token %}
-                                <!--Day select begins-->
-                                <div class="daySelect">
-                                    <h3>Year Select</h3>
-                                    <br>
-<!--                                    <input type="month" id="date" name="date" class="date" value=""><br><br>-->
-                                    <select name="year" class="year" id="year">
-                                        <option value='2022'> 2022 </option>
-                                        <option value='2021'> 2021 </option>
-                                        <option value='2020'> 2020 </option>
-                                        <option value='2019'> 2019 </option>
-                                        <option value='2018'> 2018 </option>
-                                        <option value='2017'> 2017 </option>
-                                    </select><br><br>
-                                </div>
-                                <!--Day select ends-->
-
-                                <!--Agriculture select begins-->
-                                <div class="agricultureSelect">
-                                    <h3>Agriculture Select</h3>
-                                    <br>
-                                    <select name="agriculture" id="agriculture">
-                                        <option value='All'> All </option>
-                                        <option value='Corn'> Corn </option>
-                                        <option value='Wheat'> Wheat </option>
-                                        <option value='Rice'> Rice </option>
-                                    </select><br><br>
-                                </div>
-                                <!--Agriculture select ends-->
-
-<!--                                &lt;!&ndash;Location select begins&ndash;&gt;-->
-<!--                                <div class="locationSelect">-->
-<!--                                    <h3>Location Select</h3>-->
-<!--                                    <br>-->
-<!--                                    <select name="location" id="location">-->
-<!--                                        <option value='United States'> United States </option>-->
-<!--                                        <option value='AL'> Alabama</option>-->
-<!--                                        <option value='AK'> Alaska</option>-->
-<!--                                        <option value='AZ'> Arizona</option>-->
-<!--                                        <option value='AR'> Arkansas</option>-->
-<!--                                        <option value='CA'> California</option>-->
-<!--                                        <option value='CO'> Colorado</option>-->
-<!--                                        <option value='CT'> Connecticut</option>-->
-<!--                                        <option value='DE'> Delaware</option>-->
-<!--                                        <option value='DC'> District of Columbia</option>-->
-<!--                                        <option value='FL'> Florida</option>-->
-<!--                                        <option value='GA'> Georgia</option>-->
-<!--                                        <option value='HI'> Hawaii</option>-->
-<!--                                        <option value='ID'> Idaho</option>-->
-<!--                                        <option value='IL'> Illinois</option>-->
-<!--                                        <option value='IN'> Indiana</option>-->
-<!--                                        <option value='IA'> Iowa</option>-->
-<!--                                        <option value='KS'> Kansas</option>-->
-<!--                                        <option value='KY'> Kentucky</option>-->
-<!--                                        <option value='LA'> Louisiana</option>-->
-<!--                                        <option value='ME'> Maine</option>-->
-<!--                                        <option value='MD'> Maryland</option>-->
-<!--                                        <option value='MA'> Massachusetts</option>-->
-<!--                                        <option value='MI'> Michigan</option>-->
-<!--                                        <option value='MN'> Minnesota</option>-->
-<!--                                        <option value='MS'> Mississippi</option>-->
-<!--                                        <option value='MO'> Missouri</option>-->
-<!--                                        <option value='MT'> Montana</option>-->
-<!--                                        <option value='NE'> Nebraska</option>-->
-<!--                                        <option value='NV'> Nevada</option>-->
-<!--                                        <option value='NH'> New Hampshire</option>-->
-<!--                                        <option value='NJ'> New Jeresy</option>-->
-<!--                                        <option value='NM'> New Mexico</option>-->
-<!--                                        <option value='NY'> New York</option>-->
-<!--                                        <option value='NC'> North Carolina</option>-->
-<!--                                        <option value='ND'> North Dakota</option>-->
-<!--                                        <option value='OH'> Ohio</option>-->
-<!--                                        <option value='OK'> Oklahoma</option>-->
-<!--                                        <option value='OR'> Oregon</option>-->
-<!--                                        <option value='PA'> Pennsylvania</option>-->
-<!--                                        <option value='RI'> Rhode Island</option>-->
-<!--                                        <option value='SC'> SouthCarolina</option>-->
-<!--                                        <option value='SD'> South Dakota</option>-->
-<!--                                        <option value='TN'> Tennessee</option>-->
-<!--                                        <option value='TX'> Texas</option>-->
-<!--                                        <option value='UT'> Utah</option>-->
-<!--                                        <option value='VT'> Vermont</option>-->
-<!--                                        <option value='VA'> Virginia</option>-->
-<!--                                        <option value='WA'> Washington</option>-->
-<!--                                        <option value='WV'> West Virginia</option>-->
-<!--                                        <option value='WI'> Wisconsin</option>-->
-<!--                                        <option value='WY'> Wyoming</option>-->
-
-<!--                                    </select><br><br>-->
-<!--                                </div>-->
-<!--                                &lt;!&ndash;Location select ends&ndash;&gt;-->
-
-                                <!--Weather select begins-->
-                                <div class="weatherSelect">
-                                    <h3>Weather Select</h3>
-                                    <br>
-                                    <select name="weather" id="weather">
-                                        <option value='All'> All </option>
-                                        <option value='Temperature'> Temperature </option>
-                                        <option value='Air Quality'> Air Quality </option>
-                                        <option value='Precipitation'> Precipitation </option>
-                                        <option value='Atmospheric pressure'> Atmospheric pressure </option>
-                                        <option value='Moisture'> Moisture </option>
-                                    </select><br><br>
-                                </div>
-                                <!--Weather select ends-->
-
-                                <!--Submit Change-->
+            <div class="first panel">
+                <div class="content">
+                    <!--show time in the very beginning-->
+                    <h3 id="showTime">
+                        Time loading...
+                    </h3><br>
+                    <!--control box to select data-->
+                    <div class="control">
+                        <form action="/create_post/" method="POST" id="post-form">
+                            {% csrf_token %}
+                            <!--Day select begins-->
+                            <div class="daySelect">
+                                <h3>Year Select</h3>
                                 <br>
-                                <input type="submit" value="Submit">
-                            </form>
-                            <br><br>
-                            <h3>Streaming</h3><br>
-                            <form action="/dashboardStream/" method="POST">
-                                {% csrf_token %}
-                                <input type="text" name="yearSelected" placeholder='Enter A Year'><br><br>
-                                <input type="submit" value="Start">
-                            </form>
-                            <br>
-                            <a href="/dashboard/"><input type="button" value="Stop"></a>
+                                <!--                                    <input type="month" id="date" name="date" class="date" value=""><br><br>-->
+                                <select name="year" class="year" id="year">
+                                    <option value='2022'> 2022 </option>
+                                    <option value='2021'> 2021 </option>
+                                    <option value='2020'> 2020 </option>
+                                    <option value='2019'> 2019 </option>
+                                    <option value='2018'> 2018 </option>
+                                    <option value='2017'> 2017 </option>
+                                </select><br><br>
+                            </div>
+                            <!--Day select ends-->
 
-                        </div>
+                            <!--Agriculture select begins-->
+                            <div class="agricultureSelect">
+                                <h3>Agriculture Select</h3>
+                                <br>
+                                <select name="agriculture" id="agriculture">
+                                    <option value='All'> All </option>
+                                    <option value='Corn'> Corn </option>
+                                    <option value='Wheat'> Wheat </option>
+                                    <option value='Rice'> Rice </option>
+                                </select><br><br>
+                            </div>
+                            <!--Agriculture select ends-->
+
+                            <!--                                &lt;!&ndash;Location select begins&ndash;&gt;-->
+                            <!--                                <div class="locationSelect">-->
+                            <!--                                    <h3>Location Select</h3>-->
+                            <!--                                    <br>-->
+                            <!--                                    <select name="location" id="location">-->
+                            <!--                                        <option value='United States'> United States </option>-->
+                            <!--                                        <option value='AL'> Alabama</option>-->
+                            <!--                                        <option value='AK'> Alaska</option>-->
+                            <!--                                        <option value='AZ'> Arizona</option>-->
+                            <!--                                        <option value='AR'> Arkansas</option>-->
+                            <!--                                        <option value='CA'> California</option>-->
+                            <!--                                        <option value='CO'> Colorado</option>-->
+                            <!--                                        <option value='CT'> Connecticut</option>-->
+                            <!--                                        <option value='DE'> Delaware</option>-->
+                            <!--                                        <option value='DC'> District of Columbia</option>-->
+                            <!--                                        <option value='FL'> Florida</option>-->
+                            <!--                                        <option value='GA'> Georgia</option>-->
+                            <!--                                        <option value='HI'> Hawaii</option>-->
+                            <!--                                        <option value='ID'> Idaho</option>-->
+                            <!--                                        <option value='IL'> Illinois</option>-->
+                            <!--                                        <option value='IN'> Indiana</option>-->
+                            <!--                                        <option value='IA'> Iowa</option>-->
+                            <!--                                        <option value='KS'> Kansas</option>-->
+                            <!--                                        <option value='KY'> Kentucky</option>-->
+                            <!--                                        <option value='LA'> Louisiana</option>-->
+                            <!--                                        <option value='ME'> Maine</option>-->
+                            <!--                                        <option value='MD'> Maryland</option>-->
+                            <!--                                        <option value='MA'> Massachusetts</option>-->
+                            <!--                                        <option value='MI'> Michigan</option>-->
+                            <!--                                        <option value='MN'> Minnesota</option>-->
+                            <!--                                        <option value='MS'> Mississippi</option>-->
+                            <!--                                        <option value='MO'> Missouri</option>-->
+                            <!--                                        <option value='MT'> Montana</option>-->
+                            <!--                                        <option value='NE'> Nebraska</option>-->
+                            <!--                                        <option value='NV'> Nevada</option>-->
+                            <!--                                        <option value='NH'> New Hampshire</option>-->
+                            <!--                                        <option value='NJ'> New Jeresy</option>-->
+                            <!--                                        <option value='NM'> New Mexico</option>-->
+                            <!--                                        <option value='NY'> New York</option>-->
+                            <!--                                        <option value='NC'> North Carolina</option>-->
+                            <!--                                        <option value='ND'> North Dakota</option>-->
+                            <!--                                        <option value='OH'> Ohio</option>-->
+                            <!--                                        <option value='OK'> Oklahoma</option>-->
+                            <!--                                        <option value='OR'> Oregon</option>-->
+                            <!--                                        <option value='PA'> Pennsylvania</option>-->
+                            <!--                                        <option value='RI'> Rhode Island</option>-->
+                            <!--                                        <option value='SC'> SouthCarolina</option>-->
+                            <!--                                        <option value='SD'> South Dakota</option>-->
+                            <!--                                        <option value='TN'> Tennessee</option>-->
+                            <!--                                        <option value='TX'> Texas</option>-->
+                            <!--                                        <option value='UT'> Utah</option>-->
+                            <!--                                        <option value='VT'> Vermont</option>-->
+                            <!--                                        <option value='VA'> Virginia</option>-->
+                            <!--                                        <option value='WA'> Washington</option>-->
+                            <!--                                        <option value='WV'> West Virginia</option>-->
+                            <!--                                        <option value='WI'> Wisconsin</option>-->
+                            <!--                                        <option value='WY'> Wyoming</option>-->
+
+                            <!--                                    </select><br><br>-->
+                            <!--                                </div>-->
+                            <!--                                &lt;!&ndash;Location select ends&ndash;&gt;-->
+
+                            <!--Weather select begins-->
+                            <div class="weatherSelect">
+                                <h3>Weather Select</h3>
+                                <br>
+                                <select name="weather" id="weather">
+                                    <option value='All'> All </option>
+                                    <option value='Temperature'> Temperature </option>
+                                    <option value='Air Quality'> Air Quality </option>
+                                    <option value='Precipitation'> Precipitation </option>
+                                    <option value='Atmospheric pressure'> Atmospheric pressure </option>
+                                    <option value='Moisture'> Moisture </option>
+                                </select><br><br>
+                            </div>
+                            <!--Weather select ends-->
+
+                            <!--Submit Change-->
+                            <br>
+                            <input type="submit" value="Submit">
+                        </form>
+                        <br><br>
+                        <h3>Streaming</h3><br>
+                        <form action="/dashboardStream/" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="yearSelected" placeholder='Enter A Year'><br><br>
+                            <input type="submit" value="Start">
+                        </form>
+                        <br>
+                        <a href="/dashboard/"><input type="button" value="Stop"></a>
+
                     </div>
                 </div>
+            </div>
 
 
         </div>
@@ -164,7 +165,7 @@
                         <h3>Time vs Price</h3>
                     </div>
                     <div class="chart">
-<!--                        <div class="label">Unit: USD</div>-->
+                        <!--                        <div class="label">Unit: USD</div>-->
                         <div class="time_vs_price_line"></div>
                     </div>
                 </div>
@@ -189,10 +190,9 @@
             <div class="location_vs_price panel">
                 <div class="inner">
                     <div class="caption">
-                        <h3>Location vs Price</h3>
+                        <h3>Average Temperature</h3>
                     </div>
                     <div class="chart">
-                        <div class="label">Unit: USD</div>
                         <div class="location_vs_price_map"></div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
             <div class="location_vs_weather panel">
                 <div class="inner">
                     <div class="caption">
-                        <h3>Location vs Weather</h3>
+                        <h3>Average Precipitation</h3>
                     </div>
                     <div class="chart">
                         <!--                    <div class="label">Unit: USD</div>-->
