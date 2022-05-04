@@ -8,16 +8,16 @@ import pandas as pd
 import random
 import pickle
 
-with open('cattle_model.pkl', 'rb') as file:
+with open('../model/cattle_model.pkl', 'rb') as file:
     cattle_model = pickle.load(file)
 
-with open('corn_model.pkl', 'rb') as file:
+with open('../model/corn_model.pkl', 'rb') as file:
     corn_model = pickle.load(file)
 
-with open('wheat_model.pkl', 'rb') as file:
+with open('../model/wheat_model.pkl', 'rb') as file:
     wheat_model = pickle.load(file)
 
-with open('milk_model.pkl', 'rb') as file:
+with open('../model/milk_model.pkl', 'rb') as file:
     milk_model = pickle.load(file)
 
 df = pd.read_excel('../data/sum.xlsx',0)
@@ -107,9 +107,15 @@ def stream(request):
 
         # ('2/1/1960', ['1.01', '1.8', '4.29', '20.9', '58.92', '-2.66'])
 
+        # convert to tuple
+        d = eval(d)
+        print(d)
+        print(f'type of d: {type(d)}')
+
+        # model code start
         da = d[0].split('/')
         if int(da[0]) < 10:
-            month = '0'+ da[0]
+            month = '0' + da[0]
         if int(da[1]) < 10:
             day = '0' + da[1]
 
@@ -117,13 +123,9 @@ def stream(request):
         date = '{}-{}-{} 00:00:00'.format(year, month, day)
 
         p_res = giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df)
+
+        # model code end
         # '1986-02-01 00:00:00'
-
-        # convert to tuple
-        d = eval(d)
-        print(d)
-        print(f'type of d: {type(d)}')
-
         # year = d[0].split('/')[2]
         # month = d[0].split('/')[0]
 
