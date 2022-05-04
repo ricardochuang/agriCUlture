@@ -26,6 +26,8 @@ urlpatterns = [
     path('ajax/map/tem', dashboardShow.first_onload_show_map_tem),
     path('ajax/map/pre', dashboardShow.first_onload_show_map_pre),
     path('results/',dashboardShow.show_selected),
+    path('results/map',dashboardShow.show_selected_map),
+    path('results/map_pre',dashboardShow.show_selected_map_pre),
     path('dashboardStream/',dashboardShow.dashboardStream),
     path('ajax/json/stream/', dashboardShow.stream),
 ]

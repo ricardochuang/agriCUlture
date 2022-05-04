@@ -198,7 +198,7 @@ window.onload = (function () {
                 color: '#FFFAFA'
             }
         },
-         {
+        {
             name: 'Milk Predict',
             // data
             data: null,
@@ -213,7 +213,7 @@ window.onload = (function () {
                     }
                 }
             }
-                },
+        },
         {
             name: 'Cattle',
             // data
@@ -224,7 +224,7 @@ window.onload = (function () {
                 color: '#2E8B57'
             }
         },
-         {
+        {
             name: 'Cattle Predict',
             // data
             data: null,
@@ -240,15 +240,15 @@ window.onload = (function () {
                 }
             }
 
-                },
+        },
         ]
     };
     $.ajax({
-        type : 'post',
-        url : '/ajax/json/',
-        dataType : 'json',
-        async:false,
-        success : function(ret) {
+        type: 'post',
+        url: '/ajax/json/',
+        dataType: 'json',
+        async: false,
+        success: function (ret) {
             console.log(ret)
             option.xAxis.data = ret.time;
             option.series[0].data = ret.corn_real;
@@ -396,21 +396,21 @@ window.onload = (function () {
         ]
     };
     $.ajax({
-            type : 'post',
-            url : '/ajax/json/',
-            dataType : 'json',
-            async:false,
-            success : function(ret) {
-//                console.log(ret)
-                option.xAxis.data = ret.time;
-                option.series[0].data = ret.temp_real;
-                option.series[1].data = ret.temp_pred;
-                option.series[2].data = ret.precipitation_real;
-                option.series[3].data = ret.precipitation_pred;
-            },
-            error : function(err) {
-            }
-        });
+        type: 'post',
+        url: '/ajax/json/',
+        dataType: 'json',
+        async: false,
+        success: function (ret) {
+            //                console.log(ret)
+            option.xAxis.data = ret.time;
+            option.series[0].data = ret.temp_real;
+            option.series[1].data = ret.temp_pred;
+            option.series[2].data = ret.precipitation_real;
+            option.series[3].data = ret.precipitation_pred;
+        },
+        error: function (err) {
+        }
+    });
     var myechart = echarts.init($('.time_vs_weather_line')[0]);
     myechart.setOption(option);
 })();
@@ -439,9 +439,6 @@ $.get('map', function (usaJson) {
     });
     option = {
         title: {
-            // text: 'USA Population Estimates (2012)',
-            // subtext: 'Data from www.census.gov',
-            // sublink: 'http://www.census.gov/popest/data/datasets.html',
             left: 'right'
         },
         tooltip: {
@@ -540,9 +537,6 @@ $.get('map', function (usaJson) {
     });
     option = {
         title: {
-            // text: 'USA Population Estimates (2012)',
-            // subtext: 'Data from www.census.gov',
-            // sublink: 'http://www.census.gov/popest/data/datasets.html',
             left: 'right'
         },
         tooltip: {
@@ -553,7 +547,7 @@ $.get('map', function (usaJson) {
         visualMap: {
             left: 'right',
             min: 0,
-            max: 1700,
+            max: 2000,
             inRange: {
                 color: [
                     '#313695',
