@@ -187,7 +187,7 @@ a{
 
 /* time_vs_weather */
 .time_vs_weather {
-  height: 18rem;
+  height: 14rem;
 }
 .time_vs_weather .caption {
   display: flex;
@@ -278,7 +278,7 @@ a{
 
 /* location_vs_weather */
 .location_vs_weather {
-  height: 10.333rem;
+  height: 15.333rem;
 }
 .location_vs_weather .caption {
   display: flex;
