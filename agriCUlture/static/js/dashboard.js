@@ -189,7 +189,7 @@ window.onload = (function () {
 
         },
         {
-            name: 'Rice',
+            name: 'Milk',
             // data
             data: null,
             type: 'line',
@@ -199,7 +199,7 @@ window.onload = (function () {
             }
         },
          {
-            name: 'Rice Predict',
+            name: 'Milk Predict',
             // data
             data: null,
             type: 'line',
@@ -207,6 +207,33 @@ window.onload = (function () {
             itemStyle: {
                 normal: {
                     color: '#FFFAFA',
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted'
+                    }
+                }
+            }
+
+                },
+        {
+            name: 'Cattle',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                color: '#2E8B57'
+            }
+        },
+         {
+            name: 'Cattle Predict',
+            // data
+            data: null,
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    color: '#2E8B57',
                     lineStyle: {
                         width: 2,
                         type: 'dotted'
@@ -223,14 +250,16 @@ window.onload = (function () {
         dataType : 'json',
         async:false,
         success : function(ret) {
-//            console.log(ret)
+            console.log(ret)
             option.xAxis.data = ret.time;
             option.series[0].data = ret.corn_real;
             option.series[1].data = ret.corn_pred;
             option.series[2].data = ret.wheat_real;
             option.series[3].data = ret.wheat_pred;
-            option.series[4].data = ret.rice_real;
-            option.series[5].data = ret.rice_pred;
+            option.series[4].data = ret.milk_real;
+            option.series[5].data = ret.milk_pred;
+            option.series[6].data = ret.cattle_real;
+            option.series[7].data = ret.cattle_pred;
         },
         error : function(err) {
         }
@@ -338,92 +367,6 @@ window.onload = (function () {
             }
 
         },
-
-        {
-            name: 'Atmospheric pressure',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                color: '#7CFC00'
-            }
-        },
-
-        {
-            name: 'Atmospheric pressure Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#7CFC00',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
-        },
-
-        {
-            name: 'Air Quality',
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                color: '#ed3f35'
-            }
-        },
-
-        {
-            name: 'Air Quality Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#ed3f35',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
-        },
-
-        {
-            name: 'Moisture',
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                color: '#FFFF00'
-            }
-        },
-
-        {
-            name: 'Moisture Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#FFFF00',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
-        },
-
         {
             name: 'Precipitation',
             // data
@@ -463,14 +406,8 @@ window.onload = (function () {
                 option.xAxis.data = ret.time;
                 option.series[0].data = ret.temp_real;
                 option.series[1].data = ret.temp_pred;
-                option.series[2].data = ret.atmospheric_real;
-                option.series[3].data = ret.atmospheric_pred;
-                option.series[4].data = ret.airQuality_real;
-                option.series[5].data = ret.airQuality_pred;
-                option.series[6].data = ret.moisture_real;
-                option.series[7].data = ret.moisture_pred;
-                option.series[8].data = ret.precipitation_real;
-                option.series[9].data = ret.precipitation_pred;
+                option.series[2].data = ret.precipitation_real;
+                option.series[3].data = ret.precipitation_pred;
             },
             error : function(err) {
             }

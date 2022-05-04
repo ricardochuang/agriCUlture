@@ -7,7 +7,6 @@ import csv
 import random
 
 
-SELECTED_YEAR = 1990
 FILE_NAME = '../data/sum.csv'
 
 ########### this method will run when we first go to http://127.0.0.1:8000/dashboard/ website #########################
@@ -18,10 +17,6 @@ def dashboard(request):
 
 ############ When using streaming, go to a new website. Using kafka here ###############################################
 def dashboardStream(request):
-    global SELECTED_YEAR
-    SELECTED_YEAR =  request.POST['yearSelected']
-    print("SELECTED_YEAR new!")
-    print(SELECTED_YEAR)
     return render(request, 'dashboardStream.html')
 
 
@@ -50,8 +45,9 @@ def stream(request):
     }
 
     res_dict['corn_real'][0] += (random.randint(0,9) * 100)
+    res_dict['temp_real'][0] += (random.randint(0,9) * 100)
     print(res_dict['corn_real'])
-    print(SELECTED_YEAR)
+    print(res_dict['temp_real'])
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
 
