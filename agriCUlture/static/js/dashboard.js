@@ -370,9 +370,7 @@ window.onload = (function () {
             //                console.log(ret)
             option.xAxis.data = ret.time;
             option.series[0].data = ret.temp_real;
-            option.series[1].data = ret.temp_pred;
-            option.series[2].data = ret.precipitation_real;
-            option.series[3].data = ret.precipitation_pred;
+            option.series[1].data = ret.precipitation_real;
         },
         error: function (err) {
         }

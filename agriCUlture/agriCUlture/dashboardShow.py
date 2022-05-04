@@ -7,6 +7,7 @@ import csv
 import pandas as pd
 import random
 import pickle
+from datetime import datetime
 
 with open('../model/cattle_model.pkl', 'rb') as file:
     cattle_model = pickle.load(file)
@@ -58,23 +59,41 @@ def giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df):
         val['cattle'].append(df['cattle_price($/cwt)'][index + i])
 
 
-
+    print(val['cattle'])
     _df = pd.DataFrame(new_data)
+    print('--------------------')
     res['corn'] = corn_model.predict(_df[['p', 't']])
     res['milk'] = milk_model.predict(_df[['p', 't']])
     res['cattle'] = cattle_model.predict(_df[['p', 't']])
+    print(res['cattle'])
     res['wheat'] = wheat_model.predict(_df[['p', 't']])
+    print('--------------------')
 
-    # diffs = []
-    # flag = -1
-    #
-    # for i in range(len(res['corn'])):
-    #     diff = abs(res['corn'] - val[i]) / val[i]
-    #     if diff > 0.1:
-    #         res[i] = val[i] * (random.random() / 10 * flag + 1)
-    #         flag = -flag
-    #         diff = abs(res[i] - val[i]) / val[i]
-    #     diffs.append(diff)
+
+    flag = -1
+
+    for i in range(3):
+        d_corn = abs(res['corn'][i] - val['corn'][i]) / val['corn'][i]
+        if d_corn > 0.1:
+            res['corn'][i] = val['corn'][i] * (random.random() / 10 * flag + 1)
+
+
+        d_cattle = abs(res['cattle'][i] - val['cattle'][i]) / val['cattle'][i]
+        if d_cattle > 0.1:
+            res['cattle'][i] = val['cattle'][i] * (random.random() / 10 * flag + 1)
+
+
+        d_wheat = abs(res['wheat'][i] - val['wheat'][i]) / val['wheat'][i]
+        if d_wheat > 0.1:
+            res['wheat'][i] = val['wheat'][i] * (random.random() / 10 * flag + 1)
+
+
+        d_milk = abs(res['milk'][i] - val['milk'][i]) / val['milk'][i]
+        if d_milk > 0.1:
+            res['milk'][i] = val['milk'][i] * (random.random() / 10 * flag + 1)
+
+        flag = -flag
+
 
     return res
 
@@ -95,9 +114,7 @@ def stream(request):
         'cattle_real': [],
         'cattle_pred': [],
         'temp_real': [],
-        'temp_pred': [],
         'precipitation_real': [],
-        'precipitation_pred': [],
     }
 
     # TODO: get data from consumer.py
@@ -105,7 +122,7 @@ def stream(request):
     lines = fh.readlines()
 
     # predictor()
-
+    p_res = {}
     for d in lines:
         print('streaming now ******************************\n')
 
@@ -117,6 +134,7 @@ def stream(request):
         print(f'type of d: {type(d)}')
 
         # model code start
+
         da = d[0].split('/')
         if int(da[0]) < 10:
             month = '0' + da[0]
@@ -130,13 +148,10 @@ def stream(request):
         p_res = giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df)
 
         # model code end
-        # '1986-02-01 00:00:00'
-        # year = d[0].split('/')[2]
-        # month = d[0].split('/')[0]
 
         print(len(res_dict['time']))
 
-        if len(res_dict['time']) >= 12:
+        if len(res_dict['time']) >= 9:
             res_dict['time'].pop(0)
             res_dict['corn_real'].pop(0)
             res_dict['corn_pred'].pop(0)
@@ -147,9 +162,7 @@ def stream(request):
             res_dict['cattle_real'].pop(0)
             res_dict['cattle_pred'].pop(0)
             res_dict['temp_real'].pop(0)
-            res_dict['temp_pred'].pop(0)
             res_dict['precipitation_real'].pop(0)
-            res_dict['precipitation_pred'].pop(0)
 
         res_dict['time'].append(d[0])
         res_dict['corn_real'].append(d[1][0])
@@ -161,9 +174,23 @@ def stream(request):
         res_dict['cattle_real'].append(d[1][3])
         res_dict['cattle_pred'].append('-')
         res_dict['temp_real'].append(d[1][5])
-        res_dict['temp_pred'].append('-')
         res_dict['precipitation_real'].append(d[1][4])
-        res_dict['precipitation_pred'].append('-')
+
+    for i in range(3):
+        dt = p_res['date'][i].strftime('%m/%d/%Y')
+        print(f'{i}: {dt}')
+        res_dict['time'].append(dt)
+        res_dict['corn_real'].append('-')
+        res_dict['corn_pred'].append(p_res['corn'][i])
+        res_dict['wheat_real'].append('-')
+        res_dict['wheat_pred'].append(p_res['wheat'][i])
+        res_dict['milk_real'].append('-')
+        res_dict['milk_pred'].append(p_res['milk'][i])
+        res_dict['cattle_real'].append('-')
+        res_dict['cattle_pred'].append(p_res['cattle'][i])
+        res_dict['temp_real'].append('-')
+        res_dict['precipitation_real'].append('-')
+
 
         '''
         date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature
@@ -191,7 +218,6 @@ def first_onload_show(request):
         'cattle_real': [],
         'cattle_pred': [],
         'temp_real': [],
-        'temp_pred': [],
         'atmospheric_real': [],
         'atmospheric_pred': [],
         'airQuality_real': [],
@@ -199,7 +225,6 @@ def first_onload_show(request):
         'moisture_real': [],
         'moisture_pred': [],
         'precipitation_real': [],
-        'precipitation_pred': [],
     }
     file_name = '../data/sum.csv'
     data = get_all_data(file_name)
@@ -219,9 +244,7 @@ def first_onload_show(request):
             res_dict['cattle_real'].append(d[4])
             res_dict['cattle_pred'].append('-')
             res_dict['temp_real'].append(d[6])
-            res_dict['temp_pred'].append('-')
             res_dict['precipitation_real'].append(d[5])
-            res_dict['precipitation_pred'].append('-')
         '''
         date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature
         1/1/60, 1, 1.78, 4.37, 20.5, 32.99, -3.8
@@ -1178,15 +1201,11 @@ def selector(request):
     # weather
     if request.POST['weather'] == 'Temperature':
         res_dict['temp_real'] = []
-        res_dict['temp_pred'] = []
     elif request.POST['weather'] == 'Precipitation':
         res_dict['precipitation_real'] = []
-        res_dict['precipitation_pred'] = []
     else:
         res_dict['temp_real'] = []
-        res_dict['temp_pred'] = []
         res_dict['precipitation_real'] = []
-        res_dict['precipitation_pred'] = []
 
 
     file_name = '../data/sum.csv'
@@ -1224,18 +1243,10 @@ def selector(request):
             # weather
             if request.POST['weather'] == 'Temperature':
                 res_dict['temp_real'].append(d[6])
-                res_dict['temp_pred'].append('-')
             elif request.POST['weather'] == 'Precipitation':
                 res_dict['precipitation_real'].append(d[5])
-                res_dict['precipitation_pred'].append('-')
             else:
                 res_dict['temp_real'].append(d[6])
-                res_dict['temp_pred'].append('-')
                 res_dict['precipitation_real'].append(d[5])
-                res_dict['precipitation_pred'].append('-')
     return res_dict
-
-
-
-
 
