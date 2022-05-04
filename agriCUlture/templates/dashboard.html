@@ -79,14 +79,9 @@
                                 <br>
                                 <input type="submit" value="Submit">
                             </form>
-                            <br><br>
+                            <br><br><br>
                             <h3>Streaming</h3><br>
-                            <form action="/dashboardStream/" method="POST">
-                                {% csrf_token %}
-<!--                                <input type="text" name="yearSelected" placeholder='Enter A Year'><br><br>-->
-                                <input type="submit" value="Start">
-                            </form>
-                            <br>
+                            <a href="/dashboardStream/"><input type="button" value="Start"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="/dashboard/"><input type="button" value="Stop"></a>
 
                         </div>
