@@ -162,7 +162,7 @@
                             type: 'line',
                             smooth: true,
                             itemStyle: {
-                                color: '#FFFAFA'
+                                color: '#E066FF'
                             }
                         },
                          {
@@ -173,7 +173,7 @@
                             smooth: true,
                             itemStyle: {
                                 normal: {
-                                    color: '#FFFAFA',
+                                    color: '#E066FF',
                                     lineStyle: {
                                         width: 2,
                                         type: 'dotted'
@@ -298,7 +298,7 @@
                                 type: 'line',
                                 smooth: true,
                                 itemStyle: {
-                                    color: '#FFFAFA'
+                                    color: '#FF4500'
                                 }
                             }
                             ]

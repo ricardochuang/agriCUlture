@@ -116,7 +116,8 @@ window.onload = (function () {
             axisLine: {
                 show: false
             },
-            boundaryGap: false
+            boundaryGap: false,
+            scale:true
         },
 
         legend: {
@@ -195,7 +196,7 @@ window.onload = (function () {
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '#FFFAFA'
+                color: '#E066FF'
             }
         },
         {
@@ -206,7 +207,7 @@ window.onload = (function () {
             smooth: true,
             itemStyle: {
                 normal: {
-                    color: '#FFFAFA',
+                    color: '#E066FF',
                     lineStyle: {
                         width: 2,
                         type: 'dotted'
@@ -319,7 +320,8 @@ window.onload = (function () {
             axisLine: {
                 show: false
             },
-            boundaryGap: false
+            boundaryGap: false,
+            scale:true,
         },
 
         legend: {
@@ -356,7 +358,7 @@ window.onload = (function () {
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '#FFFAFA'
+                color: '#FF4500'
             }
         }
         ]

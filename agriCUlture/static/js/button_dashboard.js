@@ -59,7 +59,8 @@ function create_post() {
             axisLine: {
                 show: false
             },
-            boundaryGap: false
+            boundaryGap: false,
+            scale:true,
         },
 
         legend: {
@@ -138,7 +139,7 @@ function create_post() {
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '#FFFAFA'
+                color: '#E066FF'
             }
         },
         {
@@ -149,7 +150,7 @@ function create_post() {
             smooth: true,
             itemStyle: {
                 normal: {
-                    color: '#FFFAFA',
+                    color: '#E066FF',
                     lineStyle: {
                         width: 2,
                         type: 'dotted'
@@ -237,7 +238,8 @@ function create_post() {
             axisLine: {
                 show: false
             },
-            boundaryGap: false
+            boundaryGap: false,
+            scale:true,
         },
 
         legend: {
@@ -274,7 +276,7 @@ function create_post() {
             type: 'line',
             smooth: true,
             itemStyle: {
-                color: '#FFFAFA'
+                color: '#FF4500'
             }
         },
         ]
@@ -433,14 +435,12 @@ function create_post() {
     var para = {
         "year": $('#year').val(),
         "agriculture": $('#agriculture').val(),
-        //                "location" : $('#location').val(),
         "weather": $('#weather').val()
     };
     $.ajax({
         type: 'post',
         url: '/results/',
         dataType: 'json',
-        //            data: JSON.stringify(para),
         data: para,
         async: false,
         success: function (ret) {
