@@ -7,8 +7,6 @@ import csv
 import random
 
 
-FILE_NAME = '../data/sum.csv'
-
 ########### this method will run when we first go to http://127.0.0.1:8000/dashboard/ website #########################
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -26,38 +24,76 @@ def dashboardStream(request):
 def stream(request):
     # This data show be the latest data including real and predication to show in the very beginning
 
+    res_dict = {
+        'time': [],
+        'corn_real': [],
+        'corn_pred': [],
+        'wheat_real': [],
+        'wheat_pred': [],
+        'milk_real': [],
+        'milk_pred': [],
+        'cattle_real': [],
+        'cattle_pred': [],
+        'temp_real': [],
+        'temp_pred': [],
+        'precipitation_real': [],
+        'precipitation_pred': [],
+    }
+
     # TODO: get data from consumer.py
     fh = open('../data/spark_output.txt', 'r')
     lines = fh.readlines()
 
-    for line in lines:
+    for d in lines:
         print('streaming now ******************************\n')
-        print(line)
 
+        # ('2/1/1960', ['1.01', '1.8', '4.29', '20.9', '58.92', '-2.66'])
 
-    res_dict = {'time': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-                'corn_real': [24, 40, 101, 134, 90, 230, 210, "-", "-", "-", "-", "-"],
-                'corn_pred': ["-", "-", "-", "-", "-", "-", 210, 230, 120, 230, 210, 120],
-                'wheat_real':[40, 64, 191, 324, 290, 330, 310,"-", "-", "-", "-", "-"],
-                'wheat_pred':["-", "-", "-", "-", "-", "-", 310, 213, 180, 200, 180, 79],
-                'rice_real':[12, 17, 34, 28, 16, 11, 6, "-", "-", "-", "-", "-"],
-                'rice_pred':["-", "-", "-", "-", "-", "-", 6, 19, 15, 23, 19, 40],
-                'temp_real':[24, 40, 101, 134, 90, 230, 210, "-", "-", "-", "-", "-"],
-                'temp_pred':["-", "-", "-", "-", "-", "-", 210, 230, 120, 230, 210, 120],
-                'atmospheric_real':[26, 18, 81, 74, 97, 60, 100, "-", "-", "-", "-", "-"],
-                'atmospheric_pred':["-", "-", "-", "-", "-", "-", 100, 201, 210, 170, 140, 160],
-                'airQuality_real':[45, 84, 91, 74, 160, 250, 140, "-", "-", "-", "-", "-"],
-                'airQuality_pred':["-", "-", "-", "-", "-", "-", 140, 231, 278, 322, 160, 94],
-                'moisture_real':[10, 15, 32, 34, 38, 42, 46, "-", "-", "-", "-", "-"],
-                'moisture_pred':["-", "-", "-", "-", "-", "-", 46, 21, 14, 13, 17, 20],
-                'precipitation_real':[12, 17, 34, 28, 16, 11, 6, "-", "-", "-", "-", "-"],
-                'precipitation_pred':["-", "-", "-", "-", "-", "-", 6, 19, 15, 23, 19, 40],
-    }
+        # convert to tuple
+        d = eval(d)
+        print(d)
+        print(f'type of d: {type(d)}')
 
-    res_dict['corn_real'][0] += (random.randint(0,9) * 100)
-    res_dict['temp_real'][0] += (random.randint(0,9) * 100)
-    print(res_dict['corn_real'])
-    print(res_dict['temp_real'])
+        # year = d[0].split('/')[2]
+        # month = d[0].split('/')[0]
+
+        print(len(res_dict['time']))
+
+        if len(res_dict['time']) >= 12:
+            res_dict['time'].pop(0)
+            res_dict['corn_real'].pop(0)
+            res_dict['corn_pred'].pop(0)
+            res_dict['wheat_real'].pop(0)
+            res_dict['wheat_pred'].pop(0)
+            res_dict['milk_real'].pop(0)
+            res_dict['milk_pred'].pop(0)
+            res_dict['cattle_real'].pop(0)
+            res_dict['cattle_pred'].pop(0)
+            res_dict['temp_real'].pop(0)
+            res_dict['temp_pred'].pop(0)
+            res_dict['precipitation_real'].pop(0)
+            res_dict['precipitation_pred'].pop(0)
+
+        res_dict['time'].append(d[0])
+        res_dict['corn_real'].append(d[1][0])
+        res_dict['corn_pred'].append('-')
+        res_dict['wheat_real'].append(d[1][1])
+        res_dict['wheat_pred'].append('-')
+        res_dict['milk_real'].append(d[1][2])
+        res_dict['milk_pred'].append('-')
+        res_dict['cattle_real'].append(d[1][3])
+        res_dict['cattle_pred'].append('-')
+        res_dict['temp_real'].append(d[1][5])
+        res_dict['temp_pred'].append('-')
+        res_dict['precipitation_real'].append(d[1][4])
+        res_dict['precipitation_pred'].append('-')
+
+        '''
+        date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature
+        1/1/60, 1, 1.78, 4.37, 20.5, 32.99, -3.8
+        2/1/60, 1.01, 1.8, 4.29, 20.9, 58.92, -2.66
+        '''
+
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
 
@@ -73,8 +109,10 @@ def first_onload_show(request):
         'corn_pred': [],
         'wheat_real': [],
         'wheat_pred': [],
-        'rice_real': [],
-        'rice_pred': [],
+        'milk_real': [],
+        'milk_pred': [],
+        'cattle_real': [],
+        'cattle_pred': [],
         'temp_real': [],
         'temp_pred': [],
         'atmospheric_real': [],
@@ -86,8 +124,8 @@ def first_onload_show(request):
         'precipitation_real': [],
         'precipitation_pred': [],
     }
-
-    data = get_all_data()
+    file_name = '../data/sum.csv'
+    data = get_all_data(file_name)
     for d in data:
         # print(d)
         year = d[0].split('/')[2]
@@ -99,16 +137,12 @@ def first_onload_show(request):
             res_dict['corn_pred'].append('-')
             res_dict['wheat_real'].append(d[2])
             res_dict['wheat_pred'].append('-')
-            res_dict['rice_real'].append(d[3])
-            res_dict['rice_pred'].append('-')
+            res_dict['milk_real'].append(d[3])
+            res_dict['milk_pred'].append('-')
+            res_dict['cattle_real'].append(d[4])
+            res_dict['cattle_pred'].append('-')
             res_dict['temp_real'].append(d[6])
             res_dict['temp_pred'].append('-')
-            res_dict['atmospheric_real'].append('-')
-            res_dict['atmospheric_pred'].append('-')
-            res_dict['airQuality_real'].append('-')
-            res_dict['airQuality_pred'].append('-')
-            res_dict['moisture_real'].append('-')
-            res_dict['moisture_pred'].append('-')
             res_dict['precipitation_real'].append(d[5])
             res_dict['precipitation_pred'].append('-')
         '''
@@ -119,68 +153,24 @@ def first_onload_show(request):
         # print(res_dict)
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
-
-
 #################################Showing the selected data when click "submit" on the left control bar##################
 @csrf_exempt
 def show_selected(request):
 
     #get data from dataset to show the different data. If the user choose year not 2022, do not show predication,
     #otherwise, run prediction model
-    # print(f'request: {request.POST}')
-    print(request.POST['year'])
-    # print(request.POST['agri[]'])
+    print(f'request: {request.POST}')
+    # print(request.POST['year'])
+    # print(request.POST['agriculture'])
 
-    res_dict = {
-        'time': [],
-        'corn_real': [],
-        'corn_pred': [],
-        'wheat_real': [],
-        'wheat_pred': [],
-        'rice_real': [],
-        'rice_pred': [],
-        'temp_real': [],
-        'temp_pred': [],
-        'atmospheric_real': [],
-        'atmospheric_pred': [],
-        'airQuality_real': [],
-        'airQuality_pred': [],
-        'moisture_real': [],
-        'moisture_pred': [],
-        'precipitation_real': [],
-        'precipitation_pred': [],
-    }
+    res_dict = selector(request)
 
-    data = get_all_data()
-    for d in data:
-        # print(d)
-        year = d[0].split('/')[2]
-        month = d[0].split('/')[0]
-        # print(f'year: {year}')
-        if request.POST['year'] == year:
-            res_dict['time'].append(month)
-            res_dict['corn_real'].append(d[1])
-            res_dict['corn_pred'].append('-')
-            res_dict['wheat_real'].append(d[2])
-            res_dict['wheat_pred'].append('-')
-            res_dict['rice_real'].append(d[3])
-            res_dict['rice_pred'].append('-')
-            res_dict['temp_real'].append(d[6])
-            res_dict['temp_pred'].append('-')
-            res_dict['atmospheric_real'].append('-')
-            res_dict['atmospheric_pred'].append('-')
-            res_dict['airQuality_real'].append('-')
-            res_dict['airQuality_pred'].append('-')
-            res_dict['moisture_real'].append('-')
-            res_dict['moisture_pred'].append('-')
-            res_dict['precipitation_real'].append(d[5])
-            res_dict['precipitation_pred'].append('-')
-        '''
-        date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature
-        1/1/60, 1, 1.78, 4.37, 20.5, 32.99, -3.8
-        2/1/60, 1.01, 1.8, 4.29, 20.9, 58.92, -2.66
-        '''
-        # print(res_dict)
+    '''
+    date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature
+    1/1/60, 1, 1.78, 4.37, 20.5, 32.99, -3.8
+    2/1/60, 1.01, 1.8, 4.29, 20.9, 58.92, -2.66
+    '''
+    # print(res_dict)
 
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
@@ -400,7 +390,6 @@ def first_onload_show_map_tem(request):
 }
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
-
 #################################Showing the latest current Average Temperature map data when first visit http://127.0.0.1:8000/dashboard/ #####
 @csrf_exempt
 def first_onload_show_map_pre(request):
@@ -617,10 +606,10 @@ def first_onload_show_map_pre(request):
 }
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
-
-def get_all_data():
+# helper
+def get_all_data(filename):
     res = []
-    with open(FILE_NAME, encoding='utf-8-sig') as fh:
+    with open(filename, encoding='utf-8-sig') as fh:
         reader = csv.reader(fh)
         for row in reader:
             res.append(row)
@@ -628,4 +617,96 @@ def get_all_data():
             # [date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature]
 
     return res
+
+# helper
+def selector(request):
+    res_dict = {
+        'time': []
+    }
+    # agriculture
+    if request.POST['agriculture'] == 'Corn':
+        res_dict['corn_real'] = []
+        res_dict['corn_pred'] = []
+    elif request.POST['agriculture'] == 'Wheat':
+        res_dict['wheat_real'] = []
+        res_dict['wheat_pred'] = []
+    elif request.POST['agriculture'] == 'Milk':
+        res_dict['milk_real'] = []
+        res_dict['milk_pred'] = []
+    elif request.POST['agriculture'] == 'Cattle':
+        res_dict['cattle_real'] = []
+        res_dict['cattle_pred'] = []
+    else:
+        res_dict['corn_real'] = []
+        res_dict['corn_pred'] = []
+        res_dict['wheat_real'] = []
+        res_dict['wheat_pred'] = []
+        res_dict['milk_real'] = []
+        res_dict['milk_pred'] = []
+        res_dict['cattle_real'] = []
+        res_dict['cattle_pred'] = []
+
+    # weather
+    if request.POST['weather'] == 'Temperature':
+        res_dict['temp_real'] = []
+        res_dict['temp_pred'] = []
+    elif request.POST['weather'] == 'Precipitation':
+        res_dict['precipitation_real'] = []
+        res_dict['precipitation_pred'] = []
+    else:
+        res_dict['temp_real'] = []
+        res_dict['temp_pred'] = []
+        res_dict['precipitation_real'] = []
+        res_dict['precipitation_pred'] = []
+
+
+    file_name = '../data/sum.csv'
+    data = get_all_data(file_name)
+    for d in data:
+        # print(d)
+        year = d[0].split('/')[2]
+        month = d[0].split('/')[0]
+        # print(f'year: {year}')
+        if request.POST['year'] == year:
+            res_dict['time'].append(month)
+
+            if request.POST['agriculture'] == 'Corn':
+                res_dict['corn_real'].append(d[1])
+                res_dict['corn_pred'].append('-')
+            elif request.POST['agriculture'] == 'Wheat':
+                res_dict['wheat_real'].append(d[2])
+                res_dict['wheat_pred'].append('-')
+            elif request.POST['agriculture'] == 'Milk':
+                res_dict['milk_real'].append(d[3])
+                res_dict['milk_pred'].append('-')
+            elif request.POST['agriculture'] == 'Cattle':
+                res_dict['cattle_real'].append(d[4])
+                res_dict['cattle_pred'].append('-')
+            else:
+                res_dict['corn_real'].append(d[1])
+                res_dict['corn_pred'].append('-')
+                res_dict['wheat_real'].append(d[2])
+                res_dict['wheat_pred'].append('-')
+                res_dict['milk_real'].append(d[3])
+                res_dict['milk_pred'].append('-')
+                res_dict['cattle_real'].append(d[4])
+                res_dict['cattle_pred'].append('-')
+
+            # weather
+            if request.POST['weather'] == 'Temperature':
+                res_dict['temp_real'].append(d[6])
+                res_dict['temp_pred'].append('-')
+            elif request.POST['weather'] == 'Precipitation':
+                res_dict['precipitation_real'].append(d[5])
+                res_dict['precipitation_pred'].append('-')
+            else:
+                res_dict['temp_real'].append(d[6])
+                res_dict['temp_pred'].append('-')
+                res_dict['precipitation_real'].append(d[5])
+                res_dict['precipitation_pred'].append('-')
+    return res_dict
+
+
+
+
 

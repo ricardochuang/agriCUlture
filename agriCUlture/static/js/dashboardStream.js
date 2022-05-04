@@ -1,6 +1,6 @@
 //set up
 (function () {
-    // 1、get size before load the website
+    // 1. get size before load the website
     var setFont = function () {
         var html = document.documentElement;// get html
         // get width
@@ -25,14 +25,14 @@
 
 //time_vs_price
 (function () {
-    var run_times = 0;
+    // var run_times = 0;
     //get Time
     var interval = setInterval(function () {
 
-        run_times += 1;
-        if(run_times === 10){
-            clearInterval(interval);
-        }
+        // run_times += 1;
+        // if(run_times === 10){
+        //     clearInterval(interval);
+        // }
         (function () {
             var option = {
                 //hover to show detail
@@ -369,7 +369,7 @@
             myechart.setOption(option2);
         })();
     }
-        , 1000)
+        , 2000)
 })();
 
 

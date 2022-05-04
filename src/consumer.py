@@ -16,12 +16,12 @@ def send_to_front(rdd):
     with open("../data/spark_output.txt", "a") as fh:
         for line in rdd.take(100):
             print(str(line))
-            fh.write(str(line))
+            fh.write(str(line)+'\n')
     fh.close()
 
 
 sc = SparkContext(appName="agri spark context")
-ssc = StreamingContext(sc, 10)
+ssc = StreamingContext(sc, 2)
 
 # consumer = KafkaConsumer('agri_stream',
 #                          bootstrap_servers='localhost:9092',
