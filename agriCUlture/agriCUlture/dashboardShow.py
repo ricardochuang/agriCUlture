@@ -22,12 +22,9 @@ with open('milk_model.pkl', 'rb') as file:
 
 df = pd.read_excel('../data/sum.xlsx',0)
 
-<<<<<<< HEAD
 FILE_NAME = '../data/sum.csv'
 MAP_FILE_NAME = '../data/mapdata.csv'
 
-=======
->>>>>>> refs/remotes/origin/main
 ########### this method will run when we first go to http://127.0.0.1:8000/dashboard/ website #########################
 def dashboard(request):
     return render(request, 'dashboard.html')
