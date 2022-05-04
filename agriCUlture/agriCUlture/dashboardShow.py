@@ -123,6 +123,7 @@ def stream(request):
 
     # predictor()
     p_res = {}
+
     for d in lines:
         print('streaming now ******************************\n')
 
@@ -138,8 +139,12 @@ def stream(request):
         da = d[0].split('/')
         if int(da[0]) < 10:
             month = '0' + da[0]
+        else:
+            month = da[0]
         if int(da[1]) < 10:
             day = '0' + da[1]
+        else:
+            day = da[1]
 
         year = da[2]
         date = '{}-{}-{} 00:00:00'.format(year, month, day)
@@ -176,20 +181,30 @@ def stream(request):
         res_dict['temp_real'].append(d[1][5])
         res_dict['precipitation_real'].append(d[1][4])
 
+    res_dict['corn_pred'].pop(0)
+    res_dict['wheat_pred'].pop(0)
+    res_dict['milk_pred'].pop(0)
+    res_dict['cattle_pred'].pop(0)
+    res_dict['corn_pred'].append(d[1][0])
+    res_dict['wheat_pred'].append(d[1][1])
+    res_dict['milk_pred'].append(d[1][2])
+    res_dict['cattle_pred'].append(d[1][3])
+
     for i in range(3):
         dt = p_res['date'][i].strftime('%m/%d/%Y')
         print(f'{i}: {dt}')
         res_dict['time'].append(dt)
-        res_dict['corn_real'].append('-')
         res_dict['corn_pred'].append(p_res['corn'][i])
-        res_dict['wheat_real'].append('-')
         res_dict['wheat_pred'].append(p_res['wheat'][i])
-        res_dict['milk_real'].append('-')
         res_dict['milk_pred'].append(p_res['milk'][i])
-        res_dict['cattle_real'].append('-')
         res_dict['cattle_pred'].append(p_res['cattle'][i])
+        res_dict['corn_real'].append('-')
+        res_dict['wheat_real'].append('-')
+        res_dict['milk_real'].append('-')
+        res_dict['cattle_real'].append('-')
         res_dict['temp_real'].append('-')
         res_dict['precipitation_real'].append('-')
+
 
 
         '''
