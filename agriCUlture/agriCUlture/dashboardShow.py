@@ -38,6 +38,7 @@ def dashboardStream(request):
 
 
 def giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df):
+    print(date)
     new_data = {'p': [], 't': []}
     val = {'corn':[], 'wheat': [], 'milk': [], 'cattle': []}
     res = {'date': [], 'corn': [], 'wheat': [], 'cattle': [], 'milk': []}
@@ -124,6 +125,7 @@ def stream(request):
 
         year = da[2]
         date = '{}-{}-{} 00:00:00'.format(year, month, day)
+        print(date)
 
         p_res = giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df)
 
