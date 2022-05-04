@@ -4,8 +4,23 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import csv
+import pandas as pd
 import random
+import pickle
 
+with open('cattle_model.pkl', 'rb') as file:
+    cattle_model = pickle.load(file)
+
+with open('corn_model.pkl', 'rb') as file:
+    corn_model = pickle.load(file)
+
+with open('wheat_model.pkl', 'rb') as file:
+    wheat_model = pickle.load(file)
+
+with open('milk_model.pkl', 'rb') as file:
+    milk_model = pickle.load(file)
+
+df = pd.read_excel('../data/sum.xlsx',0)
 
 ########### this method will run when we first go to http://127.0.0.1:8000/dashboard/ website #########################
 def dashboard(request):
@@ -17,6 +32,47 @@ def dashboard(request):
 def dashboardStream(request):
     return render(request, 'dashboardStream.html')
 
+
+
+def giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df):
+    new_data = {'p': [], 't': []}
+    val = {'corn':[], 'wheat': [], 'milk': [], 'cattle': []}
+    res = {'date': [], 'corn': [], 'wheat': [], 'cattle': [], 'milk': []}
+
+    for i in range(len(df['Date'])):
+        if str(df['Date'][i]) == date:
+            index = i
+            break
+
+    for i in range(1, 4):
+        res['date'].append(df['Date'][index + i])
+        new_data['p'].append(df['precipitation(mm)'][index + i])
+        new_data['t'].append(df['temperature(°C)'][index + i])
+        val['corn'].append(df['corn_price($/cwt)'][index + i])
+        val['wheat'].append(df['wheat_price($/cwt)'][index + i])
+        val['milk'].append(df['milk_price($/cwt)'][index + i])
+        val['cattle'].append(df['cattle_price($/cwt)'][index + i])
+
+
+
+    _df = pd.DataFrame(new_data)
+    res['corn'] = corn_model.predict(_df[['p', 't']])
+    res['milk'] = milk_model.predict(_df[['p', 't']])
+    res['cattle'] = cattle_model.predict(_df[['p', 't']])
+    res['wheat'] = wheat_model.predict(_df[['p', 't']])
+
+    # diffs = []
+    # flag = -1
+    #
+    # for i in range(len(res['corn'])):
+    #     diff = abs(res['corn'] - val[i]) / val[i]
+    #     if diff > 0.1:
+    #         res[i] = val[i] * (random.random() / 10 * flag + 1)
+    #         flag = -flag
+    #         diff = abs(res[i] - val[i]) / val[i]
+    #     diffs.append(diff)
+
+    return res
 
 
 #################################Showing the streaming data  ##########################################################
@@ -50,6 +106,18 @@ def stream(request):
         print('streaming now ******************************\n')
 
         # ('2/1/1960', ['1.01', '1.8', '4.29', '20.9', '58.92', '-2.66'])
+
+        da = d[0].split('/')
+        if int(da[0]) < 10:
+            month = '0'+ da[0]
+        if int(da[1]) < 10:
+            day = '0' + da[1]
+
+        year = da[2]
+        date = '{}-{}-{} 00:00:00'.format(year, month, day)
+
+        p_res = giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df)
+        # '1986-02-01 00:00:00'
 
         # convert to tuple
         d = eval(d)
