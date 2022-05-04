@@ -350,23 +350,6 @@ window.onload = (function () {
             }
         },
         {
-            name: 'Temperature Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#00f2f1',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
-        },
-        {
             name: 'Precipitation',
             // data
             data: null,
@@ -375,24 +358,7 @@ window.onload = (function () {
             itemStyle: {
                 color: '#FFFAFA'
             }
-        },
-        {
-            name: 'Precipitation Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#FFFAFA',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
-        },
+        }
         ]
     };
     $.ajax({

@@ -44,6 +44,8 @@ def stream(request):
     fh = open('../data/spark_output.txt', 'r')
     lines = fh.readlines()
 
+    # predictor()
+
     for d in lines:
         print('streaming now ******************************\n')
 
