@@ -30,7 +30,17 @@ def dashboardStream(request):
 @csrf_exempt
 def stream(request):
     # This data show be the latest data including real and predication to show in the very beginning
-    res_dict = {'time': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+
+    # TODO: get data from consumer.py
+    fh = open('../data/spark_output.txt', 'r')
+    lines = fh.readlines()
+
+    for line in lines:
+        print('streaming now ******************************\n')
+        print(line)
+
+
+    res_dict = {'time': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
                 'corn_real': [24, 40, 101, 134, 90, 230, 210, "-", "-", "-", "-", "-"],
                 'corn_pred': ["-", "-", "-", "-", "-", "-", 210, 230, 120, 230, 210, 120],
                 'wheat_real':[40, 64, 191, 324, 290, 330, 310,"-", "-", "-", "-", "-"],
