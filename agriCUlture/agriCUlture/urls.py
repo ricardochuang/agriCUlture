@@ -23,6 +23,8 @@ urlpatterns = [
     path('dashboard/', dashboardShow.dashboard),
     path('dashboard/map',map.USA),
     path('ajax/json/', dashboardShow.first_onload_show),
+    path('ajax/map/tem', dashboardShow.first_onload_show_map_tem),
+    path('ajax/map/pre', dashboardShow.first_onload_show_map_pre),
     path('results/',dashboardShow.show_selected),
     path('dashboardStream/',dashboardShow.dashboardStream),
     path('ajax/json/stream/', dashboardShow.stream),

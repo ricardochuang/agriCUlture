@@ -52,7 +52,8 @@
                                         <option value='All'> All </option>
                                         <option value='Corn'> Corn </option>
                                         <option value='Wheat'> Wheat </option>
-                                        <option value='Rice'> Rice </option>
+                                        <option value='Milk'> Milk </option>
+                                        <option value='Cattle'> Cattle </option>
                                     </select><br><br>
                                 </div>
                                 <!--Agriculture select ends-->
@@ -65,31 +66,19 @@
                                     <select name="weather" id="weather" disabled="disabled">
                                         <option value='All'> All </option>
                                         <option value='Temperature'> Temperature </option>
-                                        <option value='Air Quality'> Air Quality </option>
                                         <option value='Precipitation'> Precipitation </option>
-                                        <option value='Atmospheric pressure'> Atmospheric pressure </option>
-                                        <option value='Moisture'> Moisture </option>
                                     </select><br><br>
                                 </div>
                                 <!--Weather select ends-->
 
                                 <!--Submit Change-->
                                 <br>
-<!--                                <input type="submit" value="Submit">-->
-<!--                                <button id="111">Click me</button>-->
-<!--                                <input type="button" value="click me" id="111"/>-->
-<!--                                <p id="demo">1111</p>-->
-                                <input type="submit" value="Submit" disabled="disabled">
+                                <input type="submit" value="Submit" disabled="disabled" class="button">
                             </form>
                             <br><br>
                             <h3>Streaming</h3><br>
-                            <form action="/dashboardStream/" method="POST" id="stream">
-                                {% csrf_token %}
-                                <input type="text" name="yearSelected" placeholder='Enter A Year'><br><br>
-                                <input type="submit" value="Start">
-                            </form>
-                            <br>
-                            <a href="/dashboard/"><input type="button" value="Stop"></a>
+                            <a href="/dashboardStream/"><input type="button" value="Start" class="button"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="/dashboard/"><input type="button" value="Stop" class="button"></a>
                         </div>
                     </div>
                 </div>
