@@ -116,18 +116,18 @@ def stream(request):
         print(f'type of d: {type(d)}')
 
         # model code start
-        da = d[0].split('/')
-        if int(da[0]) < 10:
-            month = '0' + da[0]
-        if int(da[1]) < 10:
-            day = '0' + da[1]
-
-        year = da[2]
-        date = '{}-{}-{} 00:00:00'.format(year, month, day)
-
-        p_res = giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df)
-
-        # model code end
+#         da = d[0].split('/')
+#         if int(da[0]) < 10:
+#             month = '0' + da[0]
+#         if int(da[1]) < 10:
+#             day = '0' + da[1]
+#
+#         year = da[2]
+#         date = '{}-{}-{} 00:00:00'.format(year, month, day)
+#
+#         p_res = giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df)
+#
+#         # model code end
         # '1986-02-01 00:00:00'
         # year = d[0].split('/')[2]
         # month = d[0].split('/')[0]

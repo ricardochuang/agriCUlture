@@ -268,23 +268,6 @@ function create_post() {
             }
         },
         {
-            name: 'Temperature Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#00f2f1',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
-        },
-        {
             name: 'Precipitation',
             // data
             data: null,
@@ -293,23 +276,6 @@ function create_post() {
             itemStyle: {
                 color: '#FFFAFA'
             }
-        },
-        {
-            name: 'Precipitation Predict',
-            // data
-            data: null,
-            type: 'line',
-            smooth: true,
-            itemStyle: {
-                normal: {
-                    color: '#FFFAFA',
-                    lineStyle: {
-                        width: 2,
-                        type: 'dotted'
-                    }
-                }
-            }
-
         },
         ]
     };
@@ -490,9 +456,7 @@ function create_post() {
             option.series[7].data = ret.cattle_pred;
             option2.xAxis.data = ret.time;
             option2.series[0].data = ret.temp_real;
-            option2.series[1].data = ret.temp_pred;
-            option2.series[2].data = ret.precipitation_real;
-            option2.series[3].data = ret.precipitation_pred;
+            option2.series[1].data = ret.precipitation_real;
         },
         error: function (err) {
         }

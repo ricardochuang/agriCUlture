@@ -321,9 +321,7 @@
                     option.series[7].data = ret.cattle_pred;
                     option2.xAxis.data = ret.time;
                     option2.series[0].data = ret.temp_real;
-                    option2.series[1].data = ret.temp_pred;
-                    option2.series[2].data = ret.precipitation_real;
-                    option2.series[3].data = ret.precipitation_pred;
+                    option2.series[1].data = ret.precipitation_real;
                 },
                 error : function(err) {
                 }
