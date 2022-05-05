@@ -78,9 +78,9 @@ def giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df):
             res['corn'][i] = val['corn'][i] * (random.random() / 10 * flag + 1)
 
 
-        d_cattle = abs(res['cattle'][i] - val['cattle'][i]) / val['cattle'][i]
-        if d_cattle > 0.1:
-            res['cattle'][i] = val['cattle'][i] * (random.random() / 10 * flag + 1)
+#         d_cattle = abs(res['cattle'][i] - val['cattle'][i]) / val['cattle'][i]
+#         if d_cattle > 0.1:
+#             res['cattle'][i] = val['cattle'][i] * (random.random() / 10 * flag + 1)
 
 
         d_wheat = abs(res['wheat'][i] - val['wheat'][i]) / val['wheat'][i]
@@ -88,9 +88,9 @@ def giveMeRes(date, milk_model, cattle_model, corn_model, wheat_model, df):
             res['wheat'][i] = val['wheat'][i] * (random.random() / 10 * flag + 1)
 
 
-        d_milk = abs(res['milk'][i] - val['milk'][i]) / val['milk'][i]
-        if d_milk > 0.1:
-            res['milk'][i] = val['milk'][i] * (random.random() / 10 * flag + 1)
+#         d_milk = abs(res['milk'][i] - val['milk'][i]) / val['milk'][i]
+#         if d_milk > 0.1:
+#             res['milk'][i] = val['milk'][i] * (random.random() / 10 * flag + 1)
 
         flag = -flag
 
