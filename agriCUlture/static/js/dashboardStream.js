@@ -309,7 +309,8 @@
                 dataType : 'json',
                 async:false,
                 success : function(ret) {
-//                    console.log(ret)
+                    console.log("ret!!!!!!!!!!!!!!!!!!")
+                    console.log(ret.average)
                     option.xAxis.data = ret.time;
                     option.series[0].data = ret.corn_real;
                     option.series[1].data = ret.corn_pred;
@@ -322,6 +323,10 @@
                     option2.xAxis.data = ret.time;
                     option2.series[0].data = ret.temp_real;
                     option2.series[1].data = ret.precipitation_real;
+                    $('#CornAverage').html(ret.CornAverage);
+                    $('#WheatAverage').html(ret.WheatAverage);
+                    $('#CattleAverage').html(ret.CattleAverage);
+                    $('#MilkAverage').html(ret.MilkAverage);
                 },
                 error : function(err) {
                 }
