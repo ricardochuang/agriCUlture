@@ -216,7 +216,7 @@
                     tooltip: {
                                 trigger: 'axis',
                                 formatter: function (params) {
-                                            var unit = ['°C', '°C', 'kPa', 'kPa', 'ppm', 'ppm', '%', '%', 'mm', 'mm']
+                                            var unit = ['°C', 'mm']
                                             var res =
                                               "<div style='margin-bottom:5px;padding:0 12px;width:100%;height:24px;line-height:24px;border-radius:3px;'><p>" +
                                               params[0].name +
