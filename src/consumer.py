@@ -45,7 +45,7 @@ message = KafkaUtils.createDirectStream(ssc,
                                         kafkaParams={'metadata.broker.list': 'localhost:9092'})
 
 print("&***********************************\n")
-print(message)
+# print(message)
 print("&***********************************\n")
 
 # [(4/1/1972, 1.13, 1.36, 5.86, 32.2, 71.12, 7.18)]
@@ -57,7 +57,20 @@ words = message \
     .map(lambda x: (x[0], x[1:])) \
     .transform(send_to_front)
 
-wheat_avg = 
+corn_avg = words.map(lambda x: ('corn', x[1][0])) \
+    .reduce(lambda x, y: x + y)
+wheat_avg = words.map(lambda x: ('wheat', x[1][0])) \
+    .reduce(lambda x, y: x + y)
+milk_avg = words.map(lambda x: ('milk', x[1][0])) \
+    .reduce(lambda x, y: x + y)
+cattle_avg = words.map(lambda x: ('cattle', x[1][0])) \
+    .reduce(lambda x, y: x + y)
+# corn_avg.pprint()
+
+
+# wheat_avg
+# milk_avg
+# cattle_avg
 
 words.pprint()
 

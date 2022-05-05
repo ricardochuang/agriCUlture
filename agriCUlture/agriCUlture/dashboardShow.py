@@ -115,10 +115,10 @@ def stream(request):
         'cattle_pred': [],
         'temp_real': [],
         'precipitation_real': [],
-        'CornAverage':random.random(),
-        'WheatAverage':random.random(),
-        'CattleAverage':random.random(),
-        'MilkAverage':random.random(),
+        'CornAverage': random.random(),
+        'WheatAverage': random.random(),
+        'CattleAverage': random.random(),
+        'MilkAverage': random.random(),
     }
 
     # TODO: get data from consumer.py
@@ -210,12 +210,20 @@ def stream(request):
         res_dict['precipitation_real'].append('-')
 
 
-
         '''
         date, corn_price, wheat_price, milk_price, cattle_price, precipitation, temperature
         1/1/60, 1, 1.78, 4.37, 20.5, 32.99, -3.8
         2/1/60, 1.01, 1.8, 4.29, 20.9, 58.92, -2.66
         '''
+
+    corn_real = [float(x) for x in res_dict['corn_real'] if x != '-']
+    res_dict['CornAverage'] = round(sum(corn_real) / len(corn_real), 2)
+    wheat_real = [float(x) for x in res_dict['wheat_real'] if x != '-']
+    res_dict['WheatAverage'] = round(sum(wheat_real) / len(wheat_real), 2)
+    milk_real = [float(x) for x in res_dict['milk_real'] if x != '-']
+    res_dict['MilkAverage'] = round(sum(milk_real) / len(milk_real), 2)
+    cattle_real = [float(x) for x in res_dict['cattle_real'] if x != '-']
+    res_dict['CattleAverage'] = round(sum(cattle_real) / len(cattle_real), 2)
 
     return HttpResponse(json.dumps(res_dict), content_type='application/json')
 
