@@ -115,6 +115,10 @@ def stream(request):
         'cattle_pred': [],
         'temp_real': [],
         'precipitation_real': [],
+        'CornAverage':random.random(),
+        'WheatAverage':random.random(),
+        'CattleAverage':random.random(),
+        'MilkAverage':random.random(),
     }
 
     # TODO: get data from consumer.py
