@@ -35,6 +35,8 @@ sudo /opt/kafka_2.12-2.5.0/bin/zookeeper-server-start.sh /opt/kafka_2.12-2.5.0/c
 sudo JMX_PORT=8004 /opt/kafka_2.12-2.5.0/bin/kafka-server-start.sh /opt/kafka_2.12-2.5.0/config/server.properties
 # kafka manager
 sudo /opt/CMAK/target/universal/cmak-3.0.0.6/bin/cmak -Dconfig.file=/opt/CMAK/target/universal/cmak-3.0.0.6/conf/application.conf -Dhttp.port=8080
+# fire up spark job
+spark-submit --jars spark-streaming-kafka-0-8-assembly_2.11-2.3.2.jar consumer.py
 
 
 Package                Version

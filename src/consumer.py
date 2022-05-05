@@ -6,6 +6,8 @@ from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 
 TOPIC_NAME = 'agri_stream'
+
+
 # spark-submit --jars spark-streaming-kafka-0-8-assembly_2.11-2.3.2.jar consumer.py
 
 
@@ -16,7 +18,7 @@ def send_to_front(rdd):
     with open("../data/spark_output.txt", "a") as fh:
         for line in rdd.take(100):
             print(str(line))
-            fh.write(str(line)+'\n')
+            fh.write(str(line) + '\n')
     fh.close()
 
 
@@ -54,8 +56,10 @@ words = message \
     .map(lambda x: json.loads(x[1])) \
     .map(lambda x: (x[0], x[1:])) \
     .transform(send_to_front)
-words.pprint()
 
+wheat_avg = 
+
+words.pprint()
 
 # words = message \
 #     .map(lambda x: x[1]) \
